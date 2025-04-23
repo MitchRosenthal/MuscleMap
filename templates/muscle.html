@@ -1,51 +1,22 @@
 {% extends "index.html" %}
+
+{% block title %}Muscle Map – MuscleMap{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-  <h1 class="text-center mb-4">Muscle Map</h1>
-
-  <div class="text-center">
-    <div class="position-relative d-inline-block">
-      <!-- Placeholder male figure image -->
-        <img src="{{ url_for('static', filename='images/muscle_map.png') }}"  
-           alt="Muscle Map" 
-           id="muscle-map" 
-           class="img-fluid" 
-           usemap="#muscleMapMap" />
-
-      <!-- Map overlay for muscle interactivity -->
-      <map name="muscleMapMap">
-        <!-- Example for biceps -->
-        <area shape="rect" coords="160,180,200,240" alt="Biceps"
-              class="muscle-area" data-muscle="biceps" href="/muscle/biceps" />
-        <!-- Add more area tags for other muscles here -->
-      </map>
-    </div>
+  <h1 class="mb-4">Muscle Map</h1>
+  <div class="position-relative d-inline-block">
+    <img
+      src="{{ url_for('static', filename='images/muscle_map.png') }}"
+      alt="Muscle Map"
+      class="img-fluid"
+      usemap="#muscleMap"
+    />
+    <map name="muscleMap">
+      <!-- example coords—tweak these to your image -->
+      <area shape="poly" coords="150,100, 180,100, 200,200, 150,200"
+            alt="Biceps" href="{{ url_for('muscle_page', muscle_name='biceps') }}"
+            class="muscle-area" />
+      <!-- repeat for each muscle -->
+    </map>
   </div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const areas = document.querySelectorAll("area.muscle-area");
-
-    areas.forEach(area => {
-      const originalAlt = area.alt;
-
-      area.addEventListener("mouseenter", () => {
-        const label = document.createElement("div");
-        label.className = "position-absolute text-white bg-dark px-2 py-1 rounded";
-        label.id = "hover-label";
-        label.style.top = "10px";
-        label.style.left = "10px";
-        label.style.zIndex = "1000";
-        label.innerText = originalAlt;
-        document.body.appendChild(label);
-      });
-
-      area.addEventListener("mouseleave", () => {
-        const label = document.getElementById("hover-label");
-        if (label) label.remove();
-      });
-    });
-  });
-</script>
 {% endblock %}
