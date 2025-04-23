@@ -1,0 +1,199 @@
+{% extends "index.html" %}
+
+{% block title %}Muscle Quiz – MuscleMap{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Muscle Strengthening Quiz</h1>
+  <form id="quiz-form" class="text-start">
+    <div class="mb-3">
+      <label for="q1" class="form-label">1. Which muscle is most targeted by bicep curls?</label>
+      <select id="q1" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="biceps">Biceps</option>
+        <option value="triceps">Triceps</option>
+        <option value="forearms">Forearms</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q2" class="form-label">2. What is the main muscle worked during squats?</label>
+      <select id="q2" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="glutes">Glutes</option>
+        <option value="hamstrings">Hamstrings</option>
+        <option value="quads">Quads</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q3" class="form-label">3. Which muscle do push-ups primarily target?</label>
+      <select id="q3" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="deltoid">Deltoid</option>
+        <option value="pectorals">Pectorals</option>
+        <option value="triceps">Triceps</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q4" class="form-label">4. Which exercise primarily targets the triceps?</label>
+      <select id="q4" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="tricep_dips">Tricep Dips</option>
+        <option value="chin_ups">Chin Ups</option>
+        <option value="deadlifts">Deadlifts</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q5" class="form-label">5. What is the primary muscle targeted in deadlifts?</label>
+      <select id="q5" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="glutes">Glutes</option>
+        <option value="quads">Quads</option>
+        <option value="hamstrings">Hamstrings</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q6" class="form-label">6. Which muscle is strengthened by calf raises?</label>
+      <select id="q6" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="hamstrings">Hamstrings</option>
+        <option value="gastrocnemius">Gastrocnemius</option>
+        <option value="quads">Quads</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q7" class="form-label">7. Bench press strengthens which muscle most?</label>
+      <select id="q7" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="pectorals">Pectorals</option>
+        <option value="biceps">Biceps</option>
+        <option value="latissimus">Latissimus Dorsi</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q8" class="form-label">8. Which exercise best strengthens the core?</label>
+      <select id="q8" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="situps">Sit-ups</option>
+        <option value="pullups">Pull-ups</option>
+        <option value="lunges">Lunges</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q9" class="form-label">9. Lateral raises mainly target which muscle?</label>
+      <select id="q9" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="deltoid">Deltoid</option>
+        <option value="pectorals">Pectorals</option>
+        <option value="trapezius">Trapezius</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q10" class="form-label">10. Lunges strengthen which of the following?</label>
+      <select id="q10" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="quads">Quads</option>
+        <option value="deltoid">Deltoid</option>
+        <option value="latissimus">Latissimus Dorsi</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q11" class="form-label">11. Which muscle group is activated by pull-ups?</label>
+      <select id="q11" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="biceps">Biceps</option>
+        <option value="latissimus">Latissimus Dorsi</option>
+        <option value="pectorals">Pectorals</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q12" class="form-label">12. Ab wheel rollouts work which muscle most?</label>
+      <select id="q12" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="abdominals">Abdominals</option>
+        <option value="hamstrings">Hamstrings</option>
+        <option value="deltoid">Deltoid</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q13" class="form-label">13. Hip thrusts are most effective for which muscle?</label>
+      <select id="q13" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="glutes">Glutes</option>
+        <option value="quads">Quads</option>
+        <option value="calves">Calves</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q14" class="form-label">14. Which movement strengthens the lower back?</label>
+      <select id="q14" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="superman">Superman</option>
+        <option value="benchpress">Bench Press</option>
+        <option value="situps">Sit-ups</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="q15" class="form-label">15. Which targets hamstrings most effectively?</label>
+      <select id="q15" class="form-select">
+        <option value="">Select an answer</option>
+        <option value="leg_curl">Leg Curl</option>
+        <option value="squats">Squats</option>
+        <option value="lunges">Lunges</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Answers</button>
+    <button type="button" class="btn btn-warning ms-2" id="show-mistakes">Show Incorrect</button>
+    <button type="button" class="btn btn-secondary ms-2" id="reset-quiz">Start Over</button>
+  </form>
+  <div id="quiz-result" class="mt-4"></div>
+
+  <script>
+    const correctAnswers = {
+      q1: 'biceps',
+      q2: 'glutes',
+      q3: 'pectorals',
+      q4: 'tricep_dips',
+      q5: 'glutes',
+      q6: 'gastrocnemius',
+      q7: 'pectorals',
+      q8: 'situps',
+      q9: 'deltoid',
+      q10: 'quads',
+      q11: 'latissimus',
+      q12: 'abdominals',
+      q13: 'glutes',
+      q14: 'superman',
+      q15: 'leg_curl'
+    };
+
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let score = 0;
+      for (const [key, correct] of Object.entries(correctAnswers)) {
+        const userAnswer = document.getElementById(key).value;
+        if (userAnswer === correct) score++;
+        document.getElementById(key).classList.remove("is-invalid");
+      }
+      document.getElementById('quiz-result').innerText = `You scored ${score}/15 correct!`;
+    });
+
+    document.getElementById('show-mistakes').addEventListener('click', function() {
+      for (const [key, correct] of Object.entries(correctAnswers)) {
+        const userAnswer = document.getElementById(key).value;
+        const select = document.getElementById(key);
+        if (userAnswer && userAnswer !== correct) {
+          select.classList.add("is-invalid");
+        } else {
+          select.classList.remove("is-invalid");
+        }
+      }
+    });
+
+    document.getElementById('reset-quiz').addEventListener('click', function() {
+      document.getElementById('quiz-form').reset();
+      document.getElementById('quiz-result').innerText = "";
+      for (const key in correctAnswers) {
+        document.getElementById(key).classList.remove("is-invalid");
+      }
+    });
+  </script>
+{% endblock %}
