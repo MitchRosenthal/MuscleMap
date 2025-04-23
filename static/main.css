@@ -1,3 +1,7 @@
 .muscle-area {
     cursor: pointer;
   }
+  
+  body {
+    background-color: #f8f9fa;
+}
