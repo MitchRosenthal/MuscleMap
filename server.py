@@ -21,6 +21,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/muscle-map')
+def muscle_map():
+    return render_template('musclemap.html')  # Name this according to your actual file
+
 # Future path example for a specific muscle group:
 @app.route('/muscle/<muscle_name>')
 def muscle_page(muscle_name):
