@@ -1,6 +1,19 @@
 .muscle-area {
     cursor: pointer;
-  }
+}
+
+.image-map-container {
+    /* just to be sure */
+    position: relative;
+}
+  
+.muscle-highlight {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.3);
+    pointer-events: none;   /* allow clicks “through” to the <area> */
+    border-radius: 4px;     /* soften corners */
+    transition: background-color .2s;
+}
   
   body {
     background-color: #f8f9fa;
