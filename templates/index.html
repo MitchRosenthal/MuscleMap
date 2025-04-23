@@ -1,46 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}MuscleMap{% endblock %}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-  <link rel="script" href="{{ url_for('static', filename='script.js') }}">
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="{{ url_for('home') }}">MuscleMap</a>
-      <button class="navbar-toggler" type="button"
-              data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('muscle_map') }}">Muscle Map</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('quiz') }}">Quiz</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+{% extends "base.html" %}
 
-  <div class="container text-center p-5">
-    {% block content %}{% endblock %}
+{% block title %}Home | MuscleMap{% endblock %}
+
+{% block content %}
+  <div class="text-center mt-5">
+    <h1 class="display-4 fw-bold">Grow Smarter. Train Better.</h1>
+    <p class="lead mb-4">Discover the best exercises for each muscle group and get closer to your fitness goals with targeted learning.</p>
+    <a href="{{ url_for('muscle_map') }}" class="btn btn-primary btn-lg mt-3">Explore the Muscle Map</a>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+{% endblock %}
