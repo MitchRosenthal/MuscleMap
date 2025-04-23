@@ -1,27 +1,31 @@
-$(document).ready(function() {
-    console.log("script.js loaded successfully.");  // Debugging to ensure script runs
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const areas = document.querySelectorAll("area.muscle-area");
-
-        areas.forEach(area => {
-        const originalAlt = area.alt;
-
-        area.addEventListener("mouseenter", () => {
-            const label = document.createElement("div");
-            label.className = "position-absolute text-white bg-dark px-2 py-1 rounded";
-            label.id = "hover-label";
-            label.style.top = "10px";
-            label.style.left = "10px";
-            label.style.zIndex = "1000";
-            label.innerText = originalAlt;
-            document.body.appendChild(label);
-        });
-
-        area.addEventListener("mouseleave", () => {
-            const label = document.getElementById("hover-label");
-            if (label) label.remove();
-        });
-        });
+$(document).ready(function(){
+    const $container = $('.image-map-container');
+  
+    // Hover‐in: draw highlight
+    $container.on('mouseenter', 'area.muscle-area', function(){
+      // parse all x,y pairs
+      const pts = this.coords.split(',').map(Number);
+      const xs = pts.filter((_,i) => i % 2 === 0);
+      const ys = pts.filter((_,i) => i % 2 === 1);
+  
+      // compute bounding box
+      const x1 = Math.min(...xs),
+            x2 = Math.max(...xs),
+            y1 = Math.min(...ys),
+            y2 = Math.max(...ys);
+  
+      // add highlight div
+      const $hl = $('<div class="muscle-highlight"></div>').css({
+        top:    y1,
+        left:   x1,
+        width:  x2 - x1,
+        height: y2 - y1
+      });
+      $container.append($hl);
     });
-});
+  
+    // Hover‐out: remove highlight
+    $container.on('mouseleave', 'area.muscle-area', function(){
+      $container.find('.muscle-highlight').remove();
+    });
+  });

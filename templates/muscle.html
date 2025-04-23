@@ -1,22 +1,73 @@
 {% extends "index.html" %}
-
 {% block title %}Muscle Map – MuscleMap{% endblock %}
 
 {% block content %}
   <h1 class="mb-4">Muscle Map</h1>
-  <div class="position-relative d-inline-block">
+  <div class="image-map-container position-relative d-inline-block">
     <img
       src="{{ url_for('static', filename='images/muscle_map.png') }}"
       alt="Muscle Map"
       class="img-fluid"
       usemap="#muscleMap"
     />
+
     <map name="muscleMap">
-      <!-- example coords—tweak these to your image -->
-      <area shape="poly" coords="150,100, 180,100, 200,200, 150,200"
-            alt="Biceps" href="{{ url_for('muscle_page', muscle_name='biceps') }}"
-            class="muscle-area" />
-      <!-- repeat for each muscle -->
-    </map>
+        <area
+          shape="poly"
+          coords="220,180,380,180,380,280,220,280"
+          alt="Chest"
+          href="{{ url_for('muscle_page', muscle_name='chest') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="200,280,400,280,400,440,200,440"
+          alt="Abdominals"
+          href="{{ url_for('muscle_page', muscle_name='abdominals') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="180,200,230,200,230,300,180,300"
+          alt="Biceps"
+          href="{{ url_for('muscle_page', muscle_name='biceps') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="350,200,400,200,400,300,350,300"
+          alt="Biceps"
+          href="{{ url_for('muscle_page', muscle_name='biceps') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="120,140,200,140,220,200,140,200"
+          alt="Shoulders"
+          href="{{ url_for('muscle_page', muscle_name='shoulders') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="400,140,480,140,470,200,390,200"
+          alt="Shoulders"
+          href="{{ url_for('muscle_page', muscle_name='shoulders') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="210,420,300,420,300,660,210,660"
+          alt="Quadriceps"
+          href="{{ url_for('muscle_page', muscle_name='quadriceps') }}"
+          class="muscle-area"
+        />
+        <area
+          shape="poly"
+          coords="310,420,400,420,400,660,310,660"
+          alt="Quadriceps"
+          href="{{ url_for('muscle_page', muscle_name='quadriceps') }}"
+          class="muscle-area"
+        />
+      </map>
   </div>
 {% endblock %}
