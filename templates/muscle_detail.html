@@ -5,8 +5,8 @@
 {% block content %}
   <h1>{{ muscle_name.title() }}</h1>
   <!-- optionally show a zoomed-in image -->
-  <img src="{{ url_for('static', filename='images/' + muscle_name + '.png') }}"
-       alt="{{ muscle_name }}"
+  <img src="{{ url_for('static', filename='gifs/' + muscle_name + '.gif') }}"
+       alt="{{ muscle_name }} animation"
        class="img-fluid mb-4" />
   <p>
     <!-- placeholder text; swap for your real content -->
