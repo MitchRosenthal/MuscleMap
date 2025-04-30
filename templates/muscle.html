@@ -1,73 +1,118 @@
+<!-- templates/muscle.html -->
 {% extends "index.html" %}
-{% block title %}Muscle Map – MuscleMap{% endblock %}
-
 {% block content %}
-  <h1 class="mb-4">Muscle Map</h1>
-  <div class="image-map-container position-relative d-inline-block">
-    <img
-      src="{{ url_for('static', filename='images/muscle_map.png') }}"
-      alt="Muscle Map"
-      class="img-fluid"
-      usemap="#muscleMap"
-    />
+  <h1 class="mb-4">Interactive Muscle Map</h1>
+  <div class="svg-map-container">
+    <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background muscle anatomy image -->
+      <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
+             width="599" height="847" />
 
-    <map name="muscleMap">
-        <area
-          shape="poly"
-          coords="220,180,380,180,380,280,220,280"
-          alt="Chest"
-          href="{{ url_for('muscle_page', muscle_name='chest') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="200,280,400,280,400,440,200,440"
-          alt="Abdominals"
-          href="{{ url_for('muscle_page', muscle_name='abdominals') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="180,200,230,200,230,300,180,300"
-          alt="Biceps"
-          href="{{ url_for('muscle_page', muscle_name='biceps') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="350,200,400,200,400,300,350,300"
-          alt="Biceps"
-          href="{{ url_for('muscle_page', muscle_name='biceps') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="120,140,200,140,220,200,140,200"
-          alt="Shoulders"
-          href="{{ url_for('muscle_page', muscle_name='shoulders') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="400,140,480,140,470,200,390,200"
-          alt="Shoulders"
-          href="{{ url_for('muscle_page', muscle_name='shoulders') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="210,420,300,420,300,660,210,660"
-          alt="Quadriceps"
-          href="{{ url_for('muscle_page', muscle_name='quadriceps') }}"
-          class="muscle-area"
-        />
-        <area
-          shape="poly"
-          coords="310,420,400,420,400,660,310,660"
-          alt="Quadriceps"
-          href="{{ url_for('muscle_page', muscle_name='quadriceps') }}"
-          class="muscle-area"
-        />
-      </map>
+      <!-- Chest (Pectoralis) -->
+      <a xlink:href="{{ url_for('muscle_page', muscle_name='chest') }}">
+        <path id="chest-left"
+              d="M 265,165 
+                 C 235,170 215,190 205,220 
+                 Q 200,240 205,260 
+                 L 245,270 
+                 Q 275,275 295,270 
+                 L 300,220 
+                 Q 290,180 265,165 Z" />
+        <path id="chest-right"
+              d="M 335,165 
+                 C 365,170 385,190 395,220 
+                 Q 400,240 395,260 
+                 L 355,270 
+                 Q 325,275 305,270 
+                 L 300,220 
+                 Q 310,180 335,165 Z" />
+      </a>
+
+      <!-- Shoulders (Deltoids) -->
+      <a xlink:href="{{ url_for('muscle_page', muscle_name='shoulders') }}">
+        <path id="deltoid-left"
+              d="M 195,145 
+                 C 175,165 165,185 170,215 
+                 Q 185,225 205,215 
+                 Q 215,185 235,165 
+                 L 195,145 Z" />
+        <path id="deltoid-right"
+              d="M 405,145 
+                 C 425,165 435,185 430,215 
+                 Q 415,225 395,215 
+                 Q 385,185 365,165 
+                 L 405,145 Z" />
+      </a>
+
+      <!-- Biceps -->
+      <a xlink:href="{{ url_for('muscle_page', muscle_name='biceps') }}">
+        <path id="bicep-left"
+              d="M 195,225 
+                 Q 185,255 190,285 
+                 Q 200,305 215,315 
+                 Q 225,295 230,265 
+                 Q 215,245 195,225 Z" />
+        <path id="bicep-right"
+              d="M 405,225 
+                 Q 415,255 410,285 
+                 Q 400,305 385,315 
+                 Q 375,295 370,265 
+                 Q 385,245 405,225 Z" />
+      </a>
+
+      <!-- Abdominals -->
+      <a xlink:href="{{ url_for('muscle_page', muscle_name='abdominals') }}">
+        <path id="abs"
+              d="M 275,275 
+                 L 325,275 
+                 Q 335,335 330,395 
+                 L 300,405 
+                 L 270,395 
+                 Q 265,335 275,275 
+                 M 285,295 L 315,295 
+                 M 280,335 L 320,335 
+                 M 275,375 L 325,375" />
+      </a>
+
+      <!-- Quadriceps -->
+      <a xlink:href="{{ url_for('muscle_page', muscle_name='quadriceps') }}">
+        <path id="quad-left"
+              d="M 265,425 
+                 Q 255,465 260,505 
+                 Q 275,545 295,585 
+                 L 305,575 
+                 Q 295,525 300,475 
+                 L 265,425 Z" />
+        <path id="quad-right"
+              d="M 335,425 
+                 Q 345,465 340,505 
+                 Q 325,545 305,585 
+                 L 295,575 
+                 Q 305,525 300,475 
+                 L 335,425 Z" />
+      </a>
+
+      <!-- Calves -->
+      <a xlink:href="{{ url_for('muscle_page', muscle_name='calves') }}">
+        <path id="calf-left"
+              d="M 285,605 
+                 Q 275,645 280,685 
+                 Q 290,715 305,735 
+                 L 315,725 
+                 Q 305,685 310,645 
+                 L 285,605 Z" />
+        <path id="calf-right"
+              d="M 315,605 
+                 Q 325,645 320,685 
+                 Q 310,715 295,735 
+                 L 285,725 
+                 Q 295,685 290,645 
+                 L 315,605 Z" />
+      </a>
+    </svg>
+  </div>
+
+  <div class="mt-4 text-center">
+    <p class="text-muted">Hover over any muscle group to highlight it, and click to learn more!</p>
   </div>
 {% endblock %}

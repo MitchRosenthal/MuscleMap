@@ -1,20 +1,53 @@
-.muscle-area {
-    cursor: pointer;
+/* Muscle map styling */
+.svg-map-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
 }
 
-.image-map-container {
-    /* just to be sure */
-    position: relative;
+.svg-map-container svg {
+  width: 100%;
+  height: auto;
 }
-  
-.muscle-highlight {
-    position: absolute;
-    background-color: rgba(255, 0, 0, 0.3);
-    pointer-events: none;   /* allow clicks “through” to the <area> */
-    border-radius: 4px;     /* soften corners */
-    transition: background-color .2s;
+
+/* Style for all clickable muscle areas */
+.svg-map-container svg path,
+.svg-map-container svg polygon {
+  fill: transparent;
+  stroke: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
-  
-  body {
-    background-color: #f8f9fa;
+
+/* Hover effect for muscles */
+.svg-map-container svg path:hover,
+.svg-map-container svg polygon:hover {
+  fill: rgba(255, 0, 0, 0.2);
+  stroke: #ff0000;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.3));
+}
+
+/* Active state for muscles */
+.svg-map-container svg path:active,
+.svg-map-container svg polygon:active {
+  fill: rgba(255, 0, 0, 0.4);
+}
+
+/* Development mode - add class 'dev-mode' to container to use */
+.svg-map-container.dev-mode svg path,
+.svg-map-container.dev-mode svg polygon {
+  fill: rgba(255, 0, 0, 0.1);
+  stroke: #ff0000;
+  stroke-width: 1;
+}
+
+.svg-map-container.dev-mode svg path:hover,
+.svg-map-container.dev-mode svg polygon:hover {
+  fill: rgba(255, 0, 0, 0.3);
+  stroke-width: 2;
+}
+
+body {
+  background-color: #f8f9fa;
 }
