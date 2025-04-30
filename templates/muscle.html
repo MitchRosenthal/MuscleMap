@@ -1,14 +1,16 @@
 <!-- templates/muscle.html -->
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% block content %}
-  <h1 class="mb-4">Interactive Muscle Map</h1>
+
+<div class="content-wrapper">
+  <h1>Interactive Muscle Map</h1>
   
   <!-- Design Mode Toggle -->
-  <div class="mb-3">
-    <button id="designModeToggle" class="btn btn-outline-primary">
+  <!--<div class="text-center mb-4">
+    <button id="designModeToggle" class="btn">
       Enable Design Mode
     </button>
-  </div>
+  </div>-->
 
   <div class="svg-map-container">
     <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
@@ -62,6 +64,8 @@
   <div class="mt-4 text-center">
     <p class="text-muted">Hover over any muscle group to highlight it, and click to learn more!</p>
   </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
@@ -76,11 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (designMode) {
             muscleLinks.style.pointerEvents = 'none';
             designModeToggle.textContent = 'Disable Design Mode';
-            designModeToggle.classList.replace('btn-outline-primary', 'btn-primary');
+            designModeToggle.style.backgroundColor = 'var(--fitness-accent)';
         } else {
             muscleLinks.style.pointerEvents = 'auto';
             designModeToggle.textContent = 'Enable Design Mode';
-            designModeToggle.classList.replace('btn-primary', 'btn-outline-primary');
+            designModeToggle.style.backgroundColor = 'var(--fitness-dark)';
         }
     });
 });
