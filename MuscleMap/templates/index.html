@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}MuscleMap - Train Smarter, Learn Better{% endblock %}
+
+{% block content %}
+<style>
+  /* Theme colors (matching quiz) */
+  :root {
+    --fitness-dark: #1a4741;
+    --fitness-light: #e8f4f2;
+    --fitness-accent: #2c8577;
+  }
+
+  /* Hero section */
+  .hero {
+    background: linear-gradient(135deg, var(--fitness-dark), var(--fitness-accent));
+    padding: 5rem 0;
+    color: white;
+    margin-bottom: 4rem;
+  }
+
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  /* CTA Button */
+  .btn-cta {
+    background-color: white;
+    color: var(--fitness-dark);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-cta:hover {
+    background-color: var(--fitness-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* Feature cards */
+  .feature-card {
+    background: white;
+    border: none;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    color: var(--fitness-accent);
+    margin-bottom: 1rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    background-color: var(--fitness-dark);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 4rem;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      padding: 0 1rem;
+    }
+    .feature-card {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Add to your existing styles */
+  .svg-map-container path {
+    fill: transparent;
+    stroke: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .svg-map-container path:hover {
+    fill: var(--fitness-accent);
+    opacity: 0.3;
+  }
+
+  .svg-map-container a:hover {
+    text-decoration: none;
+  }
+
+  /* Style for when muscle is clicked/active */
+  .svg-map-container path:active,
+  .svg-map-container path.active {
+    fill: var(--fitness-accent);
+    opacity: 0.5;
+  }
+
+  /* Container styling */
+  .svg-map-container {
+    background-color: var(--fitness-light);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .svg-map-container svg {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="hero text-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold" aria-label="MuscleMap Homepage Title">
+      Master Your Muscle Knowledge
+    </h1>
+    <p class="lead mb-4">
+      Interactive learning tools to understand muscle groups, exercises, and proper form
+    </p>
+    <a href="{{ url_for('muscle_map') }}" class="btn btn-cta btn-lg" 
+       aria-label="Explore Muscle Map Button">
+      Explore Muscle Map →
+    </a>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="container mb-5">
+  <div class="row g-4">
+    <!-- Feature 1 -->
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon">🎯</div>
+        <h3 class="h4 mb-3">Interactive Muscle Map</h3>
+        <p class="text-muted">
+          Click, learn, and explore different muscle groups with our interactive anatomy guide
+        </p>
+      </div>
+    </div>
+    
+    <!-- Feature 2 -->
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon">📝</div>
+        <h3 class="h4 mb-3">15-Question Quiz</h3>
+        <p class="text-muted">
+          Test your knowledge with our comprehensive muscle identification quiz
+        </p>
+      </div>
+    </div>
+    
+    <!-- Feature 3 -->
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon">⚡</div>
+        <h3 class="h4 mb-3">Instant Feedback</h3>
+        <p class="text-muted">
+          Get immediate results and learn from detailed explanations
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="container text-center mb-5">
+  <div class="py-5" style="background-color: var(--fitness-light); border-radius: 12px;">
+    <h2 class="mb-4">Ready to Test Your Knowledge?</h2>
+    <a href="{{ url_for('muscle_map') }}" class="btn btn-cta me-3">
+      Explore Muscle Map
+    </a>
+    <a href="{{ url_for('quiz') }}" class="btn btn-cta">
+      Take the Quiz
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer text-center">
+  <div class="container">
+    <p class="mb-0">© 2024 MuscleMap. Built with Flask, Bootstrap, and 💪</p>
+    <div class="mt-3">
+      <a href="#" class="text-white me-3" aria-label="Visit our Twitter">
+        <i class="bi bi-twitter"></i>
+      </a>
+      <a href="#" class="text-white me-3" aria-label="Visit our Instagram">
+        <i class="bi bi-instagram"></i>
+      </a>
+      <a href="#" class="text-white" aria-label="Visit our GitHub">
+        <i class="bi bi-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+{% endblock %}

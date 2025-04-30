@@ -1,0 +1,157 @@
+/* Muscle map styling */
+.svg-map-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.svg-map-container svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Style for all clickable muscle areas */
+.svg-map-container svg path,
+.svg-map-container svg polygon {
+  fill: transparent;
+  stroke: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover effect for muscles - more vibrant */
+.svg-map-container svg path:hover,
+.svg-map-container svg polygon:hover {
+  fill: var(--fitness-accent);
+  opacity: 0.5;
+  stroke: var(--fitness-dark);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px rgba(44, 133, 119, 0.5));
+}
+
+/* Active state for muscles - more vibrant */
+.svg-map-container svg path:active,
+.svg-map-container svg polygon:active {
+  fill: var(--fitness-accent);
+  opacity: 0.7;
+  stroke: var(--fitness-dark);
+  stroke-width: 2;
+}
+
+/* Development mode - add class 'dev-mode' to container to use */
+.svg-map-container.dev-mode svg path,
+.svg-map-container.dev-mode svg polygon {
+  fill: rgba(255, 0, 0, 0.1);
+  stroke: #ff0000;
+  stroke-width: 1;
+}
+
+.svg-map-container.dev-mode svg path:hover,
+.svg-map-container.dev-mode svg polygon:hover {
+  fill: rgba(255, 0, 0, 0.3);
+  stroke-width: 2;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+
+:root {
+  --fitness-dark: #1a4741;
+  --fitness-light: #e8f4f2;
+  --fitness-accent: #2c8577;
+}
+
+h1 {
+  color: var(--fitness-dark);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.svg-map-container {
+  background-color: var(--fitness-light);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.svg-map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Muscle paths styling */
+#muscle-links path {
+  fill: transparent;
+  stroke: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#muscle-links path:hover {
+  fill: var(--fitness-accent);
+  opacity: 0.5;
+  stroke: var(--fitness-dark);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px rgba(44, 133, 119, 0.5));
+}
+
+#muscle-links a:hover {
+  text-decoration: none;
+}
+
+/* Add a new active class for selected muscles */
+#muscle-links path.active {
+  fill: var(--fitness-accent);
+  opacity: 0.7;
+  stroke: var(--fitness-dark);
+  stroke-width: 2;
+}
+
+/* Design mode toggle button */
+#designModeToggle {
+  background-color: var(--fitness-dark);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+#designModeToggle:hover {
+  background-color: var(--fitness-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Helper text */
+.text-muted {
+  color: var(--fitness-dark) !important;
+  opacity: 0.7;
+}
+
+/* Container wrapper */
+.content-wrapper {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .svg-map-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+}
