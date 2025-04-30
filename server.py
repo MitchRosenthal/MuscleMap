@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
+from muscle_data import muscles
 
 app = Flask(__name__)
 
@@ -10,11 +11,17 @@ def home():
 def muscle_map():
     return render_template('muscle.html')
 
-@app.route('/muscle/<muscle_name>')
-def muscle_page(muscle_name):
-    # for now, just render a simple detail page
-    return render_template('muscle_detail.html',
-                           muscle_name=muscle_name)
+@app.route('/muscle/<muscle_name>/page/<int:page>')
+def muscle_page(muscle_name, page):
+    muscle = muscles.get(muscle_name)
+    if not muscle:
+        abort(404)
+
+    # Render the correct template based on the step/page
+    try:
+        return render_template(f'muscle_page_{page}.html', muscle=muscle, muscle_name=muscle_name)
+    except:
+        abort(404)
 
 @app.route('/quiz')
 def quiz():
