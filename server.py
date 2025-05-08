@@ -28,5 +28,9 @@ def quiz():
     # you'll create templates/quiz.html next
     return render_template('quiz.html')
 
+@app.route('/quizgame')
+def quizgame():
+    return render_template('quizgame.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

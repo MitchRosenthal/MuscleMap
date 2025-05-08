@@ -3,197 +3,1234 @@
 {% block title %}Muscle Quiz – MuscleMap{% endblock %}
 
 {% block content %}
-  <h1 class="mb-4">Muscle Strengthening Quiz</h1>
+<style>
+  /* Custom theme colors */
+  :root {
+    --fitness-dark: #1a4741;
+    --fitness-light: #e8f4f2;
+    --fitness-accent: #2c8577;
+  }
+
+  /* Import Google Font */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+  /* General styles */
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .quiz-container {
+    background-color: var(--fitness-light);
+    border-radius: 10px;
+    padding: 2rem;
+  }
+
+  .muscle-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid var(--fitness-dark);
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+
+  .muscle-image:hover {
+    transform: scale(1.1);
+  }
+
+  .fun-fact-btn {
+    font-size: 0.9rem;
+    color: var(--fitness-accent);
+    cursor: pointer;
+  }
+
+  .progress {
+    height: 25px;
+    background-color: var(--fitness-light);
+    border: 1px solid var(--fitness-dark);
+  }
+
+  .progress-bar {
+    background-color: var(--fitness-accent);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .muscle-image {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  /* Add these to your existing styles */
+  .question-container {
+    display: none; /* Hide all questions by default */
+  }
+
+  .question-container.active {
+    display: block; /* Show only active question */
+  }
+
+  .navigation-buttons {
+    margin-top: 2rem;
+  }
+
+  #submit-button {
+    display: none; /* Hide submit button by default */
+  }
+
+  /* Add to your existing styles */
+  .clickable-muscle {
+    fill: transparent;
+    stroke: transparent;
+    cursor: pointer;
+    transition: fill 0.3s;
+  }
+
+  .clickable-muscle:hover {
+    fill: rgba(52, 152, 219, 0.3);
+  }
+
+  .clickable-muscle.selected {
+    fill: rgba(46, 204, 113, 0.4);
+  }
+
+  .clickable-muscle.incorrect {
+    fill: rgba(231, 76, 60, 0.4);
+  }
+
+  .svg-map-container {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    user-select: none;
+  }
+
+  .svg-map-container svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Hide any unwanted controls */
+  #svgDrawingTools,
+  #pathControls,
+  .drawing-controls,
+  .path-editor,
+  .svg-controls,
+  .coordinate-display {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .svg-map-container {
+    pointer-events: none;
+  }
+
+  .svg-map-container .clickable-muscle {
+    pointer-events: auto;
+  }
+
+  /* Add to your existing styles */
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 8px solid #28a745;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .feedback-item {
+    border-left: 4px solid;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .feedback-item.correct {
+    border-left-color: #28a745;
+    background-color: #f8fff8;
+  }
+
+  .feedback-item.incorrect {
+    border-left-color: #dc3545;
+    background-color: #fff8f8;
+  }
+
+  .results-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media print {
+    .btn {
+      display: none;
+    }
+    .card {
+      border: none;
+    }
+    .feedback-item {
+      break-inside: avoid;
+    }
+  }
+</style>
+
+<!-- Quiz content with updated structure -->
+<div class="quiz-container">
+  <h1 class="mb-4 text-center">Muscle Strengthening Quiz</h1>
+
+  <!-- Progress Bar -->
+  <div class="progress mb-4">
+    <div id="quiz-progress" class="progress-bar" role="progressbar" 
+         aria-valuenow="0" aria-valuemin="0" aria-valuemax="15">
+      0/15 Questions Answered
+    </div>
+  </div>
+
   <form id="quiz-form" class="text-start">
-    <div class="mb-3">
-      <label for="q1" class="form-label">1. Which muscle is most targeted by bicep curls?</label>
-      <select id="q1" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="biceps">Biceps</option>
-        <option value="triceps">Triceps</option>
-        <option value="forearms">Forearms</option>
-      </select>
+    <!-- Question 1 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <h4>Click the muscle that is primarily worked during bicep curls:</h4>
+        
+        <div class="svg-map-container">
+          <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background muscle anatomy image -->
+            <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
+                   width="599" height="847" />
+
+            <g id="muscle-links">
+              <!-- Chest (Pectoralis) -->
+              <path id="chest-left" class="clickable-muscle"
+                    data-muscle="pectorals"
+                    d="M 290,189 L 259,185 L 249,191 L 241,197 L 235,209 L 238,230 L 244,247 L 254,258 L 266,262 L 291,259 L 298,248 L 299,228 L 291,191 Z" />
+              <path id="chest-right" class="clickable-muscle"
+                    data-muscle="pectorals"
+                    d="M 315,190 L 308,204 L 305,221 L 305,247 L 312,258 L 319,262 L 328,264 L 337,264 L 347,260 L 354,254 L 359,243 L 364,229 L 367,218 L 367,213 L 367,206 L 358,195 L 350,190 L 341,187 L 321,189 L 315,192 Z" />
+
+              <!-- Shoulders (Deltoids) -->
+              <path id="deltoid-left" class="clickable-muscle"
+                    data-muscle="deltoid"
+                    d="M 250,186 L 236,197 L 233,207 L 220,226 L 214,229 L 209,226 L 207,213 L 207,202 L 209,192 L 215,184 L 221,179 L 229,176 L 233,174 L 239,179 L 255,184 Z" />
+              <path id="deltoid-right" class="clickable-muscle"
+                    data-muscle="deltoid"
+                    d="M 343,185 L 359,193 L 369,205 L 373,215 L 381,225 L 386,227 L 390,226 L 392,223 L 394,218 L 394,210 L 394,204 L 392,194 L 390,188 L 385,182 L 379,179 L 373,175 L 367,173 L 362,181 L 353,181 L 343,185 Z" />
+
+              <!-- Biceps -->
+              <path id="bicep-left" class="clickable-muscle"
+                    data-muscle="biceps"
+                    d="M 227,221 L 219,232 L 210,249 L 206,265 L 203,279 L 203,292 L 207,301 L 209,305 L 217,301 L 224,290 L 226,281 L 232,263 L 234,253 L 235,241 L 234,230 L 231,221 Z" />
+              <path id="bicep-right" class="clickable-muscle"
+                    data-muscle="biceps"
+                    d="M 384,232 L 373,220 L 369,234 L 367,252 L 370,263 L 375,277 L 380,292 L 385,299 L 392,303 L 398,289 L 399,274 L 396,258 L 390,244 Z" />
+            </g>
+          </svg>
+        </div>
+        
+        <div class="answer-feedback mt-3" style="display: none;"></div>
+        <div class="hint mt-2 text-muted">
+          <small>Click on the muscle that you think is most targeted during bicep curls</small>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q2" class="form-label">2. What is the main muscle worked during squats?</label>
-      <select id="q2" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="glutes">Glutes</option>
-        <option value="hamstrings">Hamstrings</option>
-        <option value="quads">Quads</option>
-      </select>
+
+    <!-- Question 2 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <h4>Click the muscle that is primarily worked during bench press:</h4>
+        
+        <div class="svg-map-container">
+          <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
+            <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
+                   width="599" height="847" />
+            <g id="muscle-links">
+              <!-- Same muscle paths as Q1, but different correct answer -->
+              <path id="chest-left" class="clickable-muscle"
+                    data-muscle="pectorals"
+                    d="M 290,189 L 259,185 L 249,191 L 241,197 L 235,209 L 238,230 L 244,247 L 254,258 L 266,262 L 291,259 L 298,248 L 299,228 L 291,191 Z" />
+              <path id="chest-right" class="clickable-muscle"
+                    data-muscle="pectorals"
+                    d="M 315,190 L 308,204 L 305,221 L 305,247 L 312,258 L 319,262 L 328,264 L 337,264 L 347,260 L 354,254 L 359,243 L 364,229 L 367,218 L 367,213 L 367,206 L 358,195 L 350,190 L 341,187 L 321,189 L 315,192 Z" />
+              <!-- Include other muscles as decoys -->
+            </g>
+          </svg>
+        </div>
+        
+        <div class="answer-feedback mt-3" style="display: none;"></div>
+        <div class="hint mt-2 text-muted">
+          <small>Click on the muscle that is most activated during bench press</small>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q3" class="form-label">3. Which muscle do push-ups primarily target?</label>
-      <select id="q3" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="deltoid">Deltoid</option>
-        <option value="pectorals">Pectorals</option>
-        <option value="triceps">Triceps</option>
-      </select>
+
+    <!-- Question 3 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <h4>Click the muscle that is primarily worked during lateral raises:</h4>
+        
+        <div class="svg-map-container">
+          <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
+            <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
+                   width="599" height="847" />
+            <g id="muscle-links">
+              <!-- Include the deltoids and other muscles -->
+              <path id="deltoid-left" class="clickable-muscle"
+                    data-muscle="deltoid"
+                    d="M 250,186 L 236,197 L 233,207 L 220,226 L 214,229 L 209,226 L 207,213 L 207,202 L 209,192 L 215,184 L 221,179 L 229,176 L 233,174 L 239,179 L 255,184 Z" />
+              <path id="deltoid-right" class="clickable-muscle"
+                    data-muscle="deltoid"
+                    d="M 343,185 L 359,193 L 369,205 L 373,215 L 381,225 L 386,227 L 390,226 L 392,223 L 394,218 L 394,210 L 394,204 L 392,194 L 390,188 L 385,182 L 379,179 L 373,175 L 367,173 L 362,181 L 353,181 L 343,185 Z" />
+              <!-- Include other muscles as decoys -->
+            </g>
+          </svg>
+        </div>
+        
+        <div class="answer-feedback mt-3" style="display: none;"></div>
+        <div class="hint mt-2 text-muted">
+          <small>Click on the muscle that is most activated during lateral raises</small>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q4" class="form-label">4. Which exercise primarily targets the triceps?</label>
-      <select id="q4" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="tricep_dips">Tricep Dips</option>
-        <option value="chin_ups">Chin Ups</option>
-        <option value="deadlifts">Deadlifts</option>
-      </select>
+
+    <!-- Question 4 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/triceps.png') }}" 
+             alt="Triceps muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Triceps - Back of upper arm"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q4" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Dips for the back of your arms.">
+            4. Which exercise primarily targets the triceps?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q4" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="tricep_dips">Tricep Dips</option>
+            <option value="chin_ups">Chin Ups</option>
+            <option value="deadlifts">Deadlifts</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact4">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact4" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The triceps has three heads, making it larger than the biceps!
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q5" class="form-label">5. What is the primary muscle targeted in deadlifts?</label>
-      <select id="q5" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="glutes">Glutes</option>
-        <option value="quads">Quads</option>
-        <option value="hamstrings">Hamstrings</option>
-      </select>
+
+    <!-- Question 5 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/glutes.png') }}" 
+             alt="Glutes muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Gluteus Maximus - Largest muscle in the body"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q5" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Biggest muscle in your posterior chain.">
+            5. What is the primary muscle targeted in deadlifts?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q5" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="glutes">Glutes</option>
+            <option value="quads">Quads</option>
+            <option value="hamstrings">Hamstrings</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact5">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact5" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The glutes are crucial for maintaining proper posture and walking.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q6" class="form-label">6. Which muscle is strengthened by calf raises?</label>
-      <select id="q6" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="hamstrings">Hamstrings</option>
-        <option value="gastrocnemius">Gastrocnemius</option>
-        <option value="quads">Quads</option>
-      </select>
+
+    <!-- Question 6 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/gastrocnemius.png') }}" 
+             alt="Calf muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Gastrocnemius - Main calf muscle"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q6" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Calf muscle.">
+            6. Which muscle is strengthened by calf raises?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q6" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="hamstrings">Hamstrings</option>
+            <option value="gastrocnemius">Gastrocnemius</option>
+            <option value="quads">Quads</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact6">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact6" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The gastrocnemius gives the calf its distinctive diamond shape.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q7" class="form-label">7. Bench press strengthens which muscle most?</label>
-      <select id="q7" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="pectorals">Pectorals</option>
-        <option value="biceps">Biceps</option>
-        <option value="latissimus">Latissimus Dorsi</option>
-      </select>
+
+    <!-- Question 7 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/pectorals.png') }}" 
+             alt="Pectorals muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Pectoralis Major - Main chest muscle"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q7" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Main chest muscle.">
+            7. Bench press strengthens which muscle most?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q7" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="pectorals">Pectorals</option>
+            <option value="biceps">Biceps</option>
+            <option value="latissimus">Latissimus Dorsi</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact7">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact7" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The pectorals are commonly called 'pecs' and are essential for pushing movements.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q8" class="form-label">8. Which exercise best strengthens the core?</label>
-      <select id="q8" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="situps">Sit-ups</option>
-        <option value="pullups">Pull-ups</option>
-        <option value="lunges">Lunges</option>
-      </select>
+
+    <!-- Question 8 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/abdominals.png') }}" 
+             alt="Abdominal muscles diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Abdominal muscles - Core muscles"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q8" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Core exercise.">
+            8. Which exercise best strengthens the core?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q8" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="situps">Sit-ups</option>
+            <option value="pullups">Pull-ups</option>
+            <option value="lunges">Lunges</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact8">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact8" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            Your core consists of multiple layers of muscles, not just the 'six-pack'!
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q9" class="form-label">9. Lateral raises mainly target which muscle?</label>
-      <select id="q9" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="deltoid">Deltoid</option>
-        <option value="pectorals">Pectorals</option>
-        <option value="trapezius">Trapezius</option>
-      </select>
+
+    <!-- Question 9 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/deltoid.png') }}" 
+             alt="Deltoid muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Deltoid - Shoulder muscle"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q9" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Shoulder muscle.">
+            9. Lateral raises mainly target which muscle?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q9" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="deltoid">Deltoid</option>
+            <option value="pectorals">Pectorals</option>
+            <option value="trapezius">Trapezius</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact9">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact9" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The deltoid is named after the Greek letter delta (Δ) due to its triangular shape.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q10" class="form-label">10. Lunges strengthen which of the following?</label>
-      <select id="q10" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="quads">Quads</option>
-        <option value="deltoid">Deltoid</option>
-        <option value="latissimus">Latissimus Dorsi</option>
-      </select>
+
+    <!-- Question 10 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/quads.png') }}" 
+             alt="Quadriceps muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Quadriceps - Front thigh muscles"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q10" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Front thigh muscle.">
+            10. Lunges strengthen which of the following?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q10" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="quads">Quads</option>
+            <option value="deltoid">Deltoid</option>
+            <option value="latissimus">Latissimus Dorsi</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact10">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact10" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The quadriceps are actually four different muscles working together.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q11" class="form-label">11. Which muscle group is activated by pull-ups?</label>
-      <select id="q11" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="biceps">Biceps</option>
-        <option value="latissimus">Latissimus Dorsi</option>
-        <option value="pectorals">Pectorals</option>
-      </select>
+
+    <!-- Question 11 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/latissimus.png') }}" 
+             alt="Latissimus dorsi muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Latissimus Dorsi - Back muscle"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q11" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Big back muscle.">
+            11. Which muscle group is activated by pull-ups?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q11" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="biceps">Biceps</option>
+            <option value="latissimus">Latissimus Dorsi</option>
+            <option value="pectorals">Pectorals</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact11">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact11" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The latissimus dorsi is nicknamed 'lats' and creates the V-shape of the back.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q12" class="form-label">12. Ab wheel rollouts work which muscle most?</label>
-      <select id="q12" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="abdominals">Abdominals</option>
-        <option value="hamstrings">Hamstrings</option>
-        <option value="deltoid">Deltoid</option>
-      </select>
+
+    <!-- Question 12 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/abdominals.png') }}" 
+             alt="Abdominal muscles diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Abdominal muscles"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q12" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Core muscles.">
+            12. Ab wheel rollouts work which muscle most?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q12" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="abdominals">Abdominals</option>
+            <option value="hamstrings">Hamstrings</option>
+            <option value="deltoid">Deltoid</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact12">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact12" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The rectus abdominis creates the 'six-pack' appearance when developed.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q13" class="form-label">13. Hip thrusts are most effective for which muscle?</label>
-      <select id="q13" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="glutes">Glutes</option>
-        <option value="quads">Quads</option>
-        <option value="calves">Calves</option>
-      </select>
+
+    <!-- Question 13 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/glutes.png') }}" 
+             alt="Glutes muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Gluteus Maximus"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q13" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Hip extension muscle.">
+            13. Hip thrusts are most effective for which muscle?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q13" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="glutes">Glutes</option>
+            <option value="quads">Quads</option>
+            <option value="calves">Calves</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact13">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact13" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            Strong glutes are essential for explosive power in sports.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q14" class="form-label">14. Which movement strengthens the lower back?</label>
-      <select id="q14" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="superman">Superman</option>
-        <option value="benchpress">Bench Press</option>
-        <option value="situps">Sit-ups</option>
-      </select>
+
+    <!-- Question 14 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/erector-spinae.png') }}" 
+             alt="Lower back muscles diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Erector Spinae - Lower back muscles"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q14" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Lower back muscles.">
+            14. Which movement strengthens the lower back?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q14" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="superman">Superman</option>
+            <option value="benchpress">Bench Press</option>
+            <option value="situps">Sit-ups</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact14">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact14" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The erector spinae helps maintain proper posture and spinal alignment.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="q15" class="form-label">15. Which targets hamstrings most effectively?</label>
-      <select id="q15" class="form-select">
-        <option value="">Select an answer</option>
-        <option value="leg_curl">Leg Curl</option>
-        <option value="squats">Squats</option>
-        <option value="lunges">Lunges</option>
-      </select>
+
+    <!-- Question 15 -->
+    <div class="mb-4 question-container">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/hamstrings.png') }}" 
+             alt="Hamstrings muscle diagram" 
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="Hamstrings - Back of thigh muscles"
+             style="width: 150px; height: 150px;">
+      </div>
+      
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q15" class="form-label mb-0" data-bs-toggle="tooltip" 
+                 title="Back of thigh muscles.">
+            15. Which targets hamstrings most effectively?
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q15" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            <option value="leg_curl">Leg Curl</option>
+            <option value="squats">Squats</option>
+            <option value="lunges">Lunges</option>
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact15">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact15" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            The hamstrings are actually three separate muscles working together.
+          </div>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit Answers</button>
-    <button type="button" class="btn btn-warning ms-2" id="show-mistakes">Show Incorrect</button>
-    <button type="button" class="btn btn-secondary ms-2" id="reset-quiz">Start Over</button>
+
+    <!-- Navigation buttons -->
+    <div class="navigation-buttons d-flex justify-content-between align-items-center">
+      <button type="button" class="btn btn-secondary" id="prev-button" style="display: none;">
+        ← Previous Question
+      </button>
+      <div class="question-counter text-center">
+        Question <span id="current-question">1</span> of 15
+      </div>
+      <button type="button" class="btn btn-primary" id="next-button">
+        Next Question →
+      </button>
+      <button type="submit" class="btn btn-success" id="submit-button" style="display: none;">
+        Submit Quiz
+      </button>
+    </div>
+
+    <!-- Review controls -->
+    <div id="review-controls" class="mt-3" style="display: none;">
+      <button type="button" class="btn btn-warning" id="show-mistakes">
+        Show Incorrect
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" id="reset-quiz">
+        Start Over
+      </button>
+      <div class="form-check form-switch d-inline-block ms-3">
+        <input class="form-check-input" type="checkbox" id="reviewMode">
+        <label class="form-check-label" for="reviewMode">Review Mode</label>
+      </div>
+    </div>
   </form>
-  <div id="quiz-result" class="mt-4"></div>
 
-  <script>
-    const correctAnswers = {
-      q1: 'biceps',
-      q2: 'glutes',
-      q3: 'pectorals',
-      q4: 'tricep_dips',
-      q5: 'glutes',
-      q6: 'gastrocnemius',
-      q7: 'pectorals',
-      q8: 'situps',
-      q9: 'deltoid',
-      q10: 'quads',
-      q11: 'latissimus',
-      q12: 'abdominals',
-      q13: 'glutes',
-      q14: 'superman',
-      q15: 'leg_curl'
-    };
+  <!-- Results Section -->
+  <div id="quiz-result" class="mt-4 alert alert-success" style="display: none;">
+  </div>
 
-    document.getElementById('quiz-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let score = 0;
-      for (const [key, correct] of Object.entries(correctAnswers)) {
-        const userAnswer = document.getElementById(key).value;
-        if (userAnswer === correct) score++;
-        document.getElementById(key).classList.remove("is-invalid");
+  <!-- Add this right before the closing </div> of quiz-container -->
+  <div id="final-feedback" class="results-container mt-4" style="display: none;">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Quiz Results</h3>
+      </div>
+      <div class="card-body">
+        <!-- Score Summary -->
+        <div class="score-summary text-center mb-4">
+          <h4 class="result-message mb-3"></h4>
+          <div class="score-circle mb-3">
+            <span id="score-number"></span>
+            <span class="text-muted">/ 15</span>
+          </div>
+        </div>
+
+        <!-- Detailed Feedback -->
+        <div class="feedback-details">
+          <h5>Question Review:</h5>
+          <div class="accordion" id="feedbackAccordion">
+            <!-- Feedback items will be inserted here dynamically -->
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" onclick="window.print()">Print Results</button>
+        <button class="btn btn-secondary" id="restart-quiz">Try Again</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const questionAnswers = {
+    1: { muscle: 'biceps', exercise: 'bicep curls' },
+    2: { muscle: 'pectorals', exercise: 'bench press' },
+    3: { muscle: 'deltoid', exercise: 'lateral raises' },
+    // Add remaining questions...
+  };
+
+  // Hints for tooltips (optional, can be expanded)
+  const hints = {
+    q1: "Think about arm curls!",
+    q2: "It's the main muscle in your buttocks.",
+    q3: "Chest muscle.",
+    q4: "Dips for the back of your arms.",
+    q5: "Biggest muscle in your posterior chain.",
+    q6: "Calf muscle.",
+    q7: "Main chest muscle.",
+    q8: "Core exercise.",
+    q9: "Shoulder muscle.",
+    q10: "Front thigh muscle.",
+    q11: "Big back muscle.",
+    q12: "Abs roller works your core.",
+    q13: "Hip extension muscle.",
+    q14: "Superman for lower back.",
+    q15: "Hamstring curl machine."
+  };
+
+  // Fun facts for each question
+  const funFacts = {
+    q1: "The biceps brachii has two heads, hence the prefix 'bi-'!",
+    q2: "The gluteus maximus is the largest muscle in the human body!",
+    // ... add facts for all questions ...
+  };
+
+  // Result messages based on score
+  const resultMessages = {
+    expert: {
+      range: [13, 15],
+      message: "🏋️‍♂️ Muscle Master! Your anatomy knowledge is outstanding!",
+      class: "alert-success"
+    },
+    intermediate: {
+      range: [9, 12],
+      message: "💪 Solid Work! You're well on your way to becoming an expert!",
+      class: "alert-info"
+    },
+    beginner: {
+      range: [0, 8],
+      message: "📚 Keep Training! Time to study your anatomy! Keep learning and you'll improve!",
+      class: "alert-warning"
+    }
+  };
+
+  // Add these variables at the top of your script
+  let currentQuestion = 1;
+  const totalQuestions = 15;
+
+  // Function to show specific question
+  function showQuestion(questionNumber) {
+    const questions = document.querySelectorAll('.question-container');
+    
+    // Hide all questions
+    questions.forEach(q => q.style.display = 'none');
+    
+    // Show current question (subtract 1 because array is 0-based)
+    if (questions[questionNumber - 1]) {
+      questions[questionNumber - 1].style.display = 'block';
+    }
+    
+    // Update question counter
+    document.getElementById('current-question').textContent = questionNumber;
+    
+    // Update navigation buttons
+    document.getElementById('prev-button').style.display = questionNumber > 1 ? 'block' : 'none';
+    document.getElementById('next-button').style.display = questionNumber < totalQuestions ? 'block' : 'none';
+    document.getElementById('submit-button').style.display = questionNumber === totalQuestions ? 'block' : 'none';
+    
+    // Update progress bar
+    updateProgress();
+  }
+
+  // Add this helper function to check if a question has been answered
+  function isQuestionAnswered(questionNumber) {
+    const select = document.querySelector(`.question-container:nth-child(${questionNumber}) select`);
+    return select && select.value !== '';
+  }
+
+  // Add event listeners for navigation
+  document.addEventListener('DOMContentLoaded', function() {
+    // Show first question initially
+    showQuestion(1);
+    
+    // Next button handler
+    document.getElementById('next-button').addEventListener('click', function() {
+      if (currentQuestion <= 3) { // First 3 questions are muscle-click
+        const selectedMuscle = document.querySelector('.question-container:nth-child(' + currentQuestion + ') .clickable-muscle.selected');
+        if (!selectedMuscle) {
+          alert('Please click on a muscle before moving to the next question.');
+          return;
+        }
+        if (selectedMuscle.dataset.muscle !== questionAnswers[currentQuestion].muscle) {
+          alert('Please select the correct muscle before moving to the next question.');
+          return;
+        }
+      } else { // Other questions are dropdowns
+        const currentSelect = document.querySelector(`.question-container:nth-child(${currentQuestion}) select`);
+        if (currentSelect && !currentSelect.value) {
+          alert('Please select an answer before moving to the next question.');
+          currentSelect.classList.add('is-invalid');
+          return;
+        }
       }
-      document.getElementById('quiz-result').innerText = `You scored ${score}/15 correct!`;
+      
+      // If validation passes, move to next question
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+        // Scroll to top of question
+        document.querySelector('.quiz-container').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    
+    // Previous button handler
+    document.getElementById('prev-button').addEventListener('click', function() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+        document.querySelector('.quiz-container').scrollIntoView({ behavior: 'smooth' });
+      }
     });
 
-    document.getElementById('show-mistakes').addEventListener('click', function() {
-      for (const [key, correct] of Object.entries(correctAnswers)) {
-        const userAnswer = document.getElementById(key).value;
-        const select = document.getElementById(key);
-        if (userAnswer && userAnswer !== correct) {
-          select.classList.add("is-invalid");
+    // Replace the submit button click handler with this form submit handler
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let score = 0;
+      const feedback = [];
+      
+      // Hide the quiz form
+      document.getElementById('quiz-form').style.display = 'none';
+      
+      // Process first 3 questions (muscle click questions)
+      for (let i = 1; i <= 3; i++) {
+        const questionContainer = document.querySelector(`.question-container:nth-child(${i})`);
+        const selectedMuscle = questionContainer.querySelector('.clickable-muscle.selected');
+        const correctMuscle = questionAnswers[i].muscle;
+        
+        if (selectedMuscle && selectedMuscle.dataset.muscle === correctMuscle) {
+          score++;
+          feedback.push({
+            question: i,
+            correct: true,
+            selected: selectedMuscle.dataset.muscle,
+            answer: correctMuscle,
+            exercise: questionAnswers[i].exercise
+          });
         } else {
-          select.classList.remove("is-invalid");
+          feedback.push({
+            question: i,
+            correct: false,
+            selected: selectedMuscle ? selectedMuscle.dataset.muscle : 'No answer',
+            answer: correctMuscle,
+            exercise: questionAnswers[i].exercise
+          });
+        }
+      }
+      
+      // Process remaining questions (dropdown questions)
+      for (let i = 4; i <= 15; i++) {
+        const select = document.getElementById(`q${i}`);
+        const selected = select.value;
+        const label = select.parentElement.previousElementSibling.textContent.trim();
+        
+        if (selected === questionAnswers[i]?.muscle) {
+          score++;
+          feedback.push({
+            question: i,
+            correct: true,
+            selected: selected,
+            answer: questionAnswers[i].muscle,
+            label: label
+          });
+        } else {
+          feedback.push({
+            question: i,
+            correct: false,
+            selected: selected || 'No answer',
+            answer: questionAnswers[i]?.muscle,
+            label: label
+          });
+        }
+      }
+      
+      // Generate feedback HTML
+      const accordion = document.getElementById('feedbackAccordion');
+      accordion.innerHTML = feedback.map((item, index) => `
+        <div class="feedback-item ${item.correct ? 'correct' : 'incorrect'} mb-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Question ${item.question}</h6>
+            <span class="${item.correct ? 'text-success' : 'text-danger'}">
+              ${item.correct ? '✅ Correct' : '❌ Incorrect'}
+            </span>
+          </div>
+          <p class="mb-1">${item.label || item.exercise}</p>
+          <small class="text-muted">
+            Your answer: ${item.selected}<br>
+            ${!item.correct ? `Correct answer: ${item.answer}` : ''}
+          </small>
+        </div>
+      `).join('');
+      
+      // Update score display
+      document.getElementById('score-number').textContent = score;
+      
+      // Set result message based on score
+      const resultMessage = document.querySelector('.result-message');
+      if (score >= 13) {
+        resultMessage.innerHTML = '🏋️‍♂️ Muscle Master!';
+        resultMessage.className = 'result-message text-success mb-3';
+      } else if (score >= 9) {
+        resultMessage.innerHTML = '💪 Solid Work!';
+        resultMessage.className = 'result-message text-primary mb-3';
+      } else {
+        resultMessage.innerHTML = '📚 Keep Training!';
+        resultMessage.className = 'result-message text-warning mb-3';
+      }
+      
+      // Show the final feedback
+      document.getElementById('final-feedback').style.display = 'block';
+      
+      // Scroll to results
+      document.getElementById('final-feedback').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Add restart handler
+    document.getElementById('restart-quiz').addEventListener('click', function() {
+      location.reload();
+    });
+
+    // Initialize all tooltips
+    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltips.forEach(tooltip => new bootstrap.Tooltip(tooltip));
+
+    // Update progress bar on any select change
+    document.querySelectorAll('.quiz-select').forEach(select => {
+      select.addEventListener('change', updateProgress);
+    });
+
+    // Review mode toggle handler
+    document.getElementById('reviewMode').addEventListener('change', function() {
+      const questions = document.querySelectorAll('.question-container');
+      questions.forEach(question => {
+        const select = question.querySelector('select');
+        const feedback = question.querySelector('.answer-feedback');
+        
+        if (this.checked) {
+          if (select.value) {
+            feedback.style.display = 'block';
+            feedback.textContent = select.value === questionAnswers[select.id].muscle 
+              ? '✅ Correct!' 
+              : `❌ Correct answer: ${questionAnswers[select.id].muscle}`;
+          }
+        } else {
+          feedback.style.display = 'none';
+        }
+      });
+    });
+
+    // Optional: Add real-time validation on select change
+    document.querySelectorAll('.quiz-select').forEach(select => {
+      select.addEventListener('change', function() {
+        if (this.value) {
+          this.classList.remove('is-invalid');
+        }
+      });
+    });
+
+    // Update muscle click handler
+    function handleMuscleClick(e, questionNumber) {
+      e.preventDefault();
+      const muscle = e.target;
+      const selectedMuscle = muscle.dataset.muscle;
+      const questionContainer = muscle.closest('.question-container');
+      const feedback = questionContainer.querySelector('.answer-feedback');
+      
+      // Remove previous selections
+      questionContainer.querySelectorAll('.clickable-muscle').forEach(m => {
+        m.classList.remove('selected', 'incorrect');
+      });
+      
+      // Add selection
+      muscle.classList.add('selected');
+      
+      // Check if correct
+      if (selectedMuscle === questionAnswers[currentQuestion].muscle) {
+        feedback.innerHTML = `<span class="text-success">✅ Correct! ${questionAnswers[currentQuestion].exercise} primarily targets the ${selectedMuscle} muscle.</span>`;
+        feedback.style.display = 'block';
+        document.getElementById('next-button').disabled = false;
+        
+        // Update progress bar when correct answer is selected
+        updateProgress();
+      } else {
+        muscle.classList.add('incorrect');
+        feedback.innerHTML = '<span class="text-danger">❌ Incorrect. Try again!</span>';
+        feedback.style.display = 'block';
+        document.getElementById('next-button').disabled = true;
+      }
+    }
+
+    // Add this to your DOMContentLoaded event listener
+    document.querySelectorAll('.clickable-muscle').forEach(muscle => {
+      const questionNumber = parseInt(muscle.closest('.question-container').dataset.questionNumber);
+      muscle.addEventListener('click', (e) => handleMuscleClick(e, questionNumber));
+    });
+  });
+
+  // Modify your progress update function to include muscle-click questions
+  function updateProgress() {
+    const total = totalQuestions;
+    let answered = 0;
+    
+    // Count muscle-click answers
+    document.querySelectorAll('.question-container').forEach((container, index) => {
+      if (index < 3) { // First 3 questions are muscle-click
+        const selectedMuscle = container.querySelector('.clickable-muscle.selected');
+        if (selectedMuscle && selectedMuscle.dataset.muscle === questionAnswers[index + 1].muscle) {
+          answered++;
+        }
+      } else { // Remaining questions are dropdowns
+        const select = container.querySelector('.quiz-select');
+        if (select && select.value) {
+          answered++;
         }
       }
     });
+    
+    const progressBar = document.getElementById('quiz-progress');
+    const percentage = (answered / total) * 100;
+    
+    progressBar.style.width = `${percentage}%`;
+    progressBar.textContent = `${answered}/${total} Questions Answered`;
+  }
 
-    document.getElementById('reset-quiz').addEventListener('click', function() {
-      document.getElementById('quiz-form').reset();
-      document.getElementById('quiz-result').innerText = "";
-      for (const key in correctAnswers) {
-        document.getElementById(key).classList.remove("is-invalid");
+  // Optional: Add keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
       }
-    });
-  </script>
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    }
+  });
+
+  // --- Show Incorrect Handler ---
+  document.getElementById('show-mistakes').addEventListener('click', function() {
+    for (const [key, answer] of Object.entries(questionAnswers)) {
+      const select = document.getElementById(key);
+      const icon = select.parentElement.querySelector('.feedback-icon');
+      if (select.value && select.value !== answer.muscle) {
+        select.classList.add("is-invalid");
+        select.classList.remove("is-valid");
+        icon.textContent = "❌";
+        icon.style.color = "red";
+        icon.style.display = "inline";
+        // Show hint as tooltip
+        select.parentElement.querySelector('.form-label').setAttribute('data-bs-original-title', hints[key]);
+        new bootstrap.Tooltip(select.parentElement.querySelector('.form-label')).show();
+        setTimeout(() => {
+          bootstrap.Tooltip.getInstance(select.parentElement.querySelector('.form-label')).hide();
+        }, 2000);
+      } else if (select.value === answer.muscle) {
+        select.classList.add("is-valid");
+        select.classList.remove("is-invalid");
+        icon.textContent = "✔️";
+        icon.style.color = "green";
+        icon.style.display = "inline";
+      } else {
+        select.classList.remove("is-valid", "is-invalid");
+        icon.style.display = "none";
+      }
+    }
+  });
+</script>
 {% endblock %}
