@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ muscle.name }} – Exercises{% endblock %}
+
+{% block content %}
+  <h1>Training the {{ muscle.name }}</h1>
+
+  <div class="my-4 text-center">
+    <img src="{{ url_for('static', filename='gifs/' + muscle_name + '.gif') }}"
+         alt="Training {{ muscle.name }}"
+         class="img-fluid rounded shadow mb-3" />
+    {% if muscle.videos %}
+      <p>{{ muscle.videos[0].description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="mt-4">
+    {% if muscle.subgroups %}
+      <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=3) }}" class="btn btn-primary">
+        Learn About Subgroups →
+      </a>
+    {% else %}
+      <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}" class="btn btn-primary">
+        Take the Quiz →
+      </a>
+    {% endif %}
+  </div>
+{% endblock %}
