@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Train That Muscle! - MuscleMap{% endblock %}
+
+{% block content %}
+<style>
+  /* Theme colors (matching existing pages) */
+  :root {
+    --fitness-dark: #1a4741;
+    --fitness-light: #e8f4f2;
+    --fitness-accent: #2c8577;
+  }
+
+  .game-container {
+    background-color: var(--fitness-light);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    position: relative;
+  }
+
+  .timer-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--fitness-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .timer-bar {
+    width: 100%; height: 8px; background: #ddd;
+    border-radius: 4px; overflow: hidden; margin-bottom: 1rem;
+  }
+  .timer-bar-fill {
+    width: 100%; height: 100%; background: var(--fitness-accent);
+    transition: width 1s linear;
+  }
+
+  .score-display, .streak-display {
+    text-align: center; margin-bottom: 1rem;
+  }
+  .score-display { font-size: 1.5rem; color: var(--fitness-accent); }
+
+  .question-container { background: white; padding: 2rem;
+    border-radius: 8px; margin-bottom: 2rem;
+  }
+
+  .answer-option { display: block; width: 100%; padding: 1rem;
+    margin: 0.5rem 0; border: 2px solid var(--fitness-light);
+    border-radius: 8px; background: white;
+    transition: all 0.3s ease; cursor: pointer; position: relative;
+  }
+  .answer-option:hover { border-color: var(--fitness-accent);
+    transform: translateY(-2px);
+  }
+
+  /* Animations */
+  @keyframes flash-green {0%,100%{background:#d4edda;}50%{background:#a8e5b9;}}
+  @keyframes shake {0%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}100%{transform:translateX(0);}}
+  .correct-flash { animation: flash-green 0.5s ease-in-out!important;
+    border-color: #28a745!important; }
+  .shake { animation: shake 0.5s ease-in-out!important;
+    border-color: #dc3545!important; }
+
+  .combo-bar { position: absolute; top: 1rem; left: 50%;
+    transform: translateX(-50%); background: var(--fitness-accent);
+    color: white; padding: 0.5rem 1rem; border-radius: 20px;
+    font-size: 1.2rem; display: none; z-index: 10;
+  }
+
+  .game-controls { text-align: center; margin-top: 2rem; }
+  .btn-game { background-color: var(--fitness-dark);
+    color: white; padding: 0.75rem 1.5rem; border-radius: 50px;
+    border: none; transition: all 0.3s ease;
+  }
+  .btn-game:hover { background-color: var(--fitness-accent);
+    transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .results-container { display: none; background: white;
+    padding: 2rem; border-radius: 8px; margin-top: 2rem;
+  }
+  .leaderboard { margin-top: 2rem; }
+  .leaderboard-item { padding: 0.5rem;
+    border-bottom: 1px solid var(--fitness-light);
+  }
+  .category-filter { margin-bottom: 2rem; text-align: center; }
+</style>
+
+<div class="game-container">
+  <div class="combo-bar" id="comboBar"></div>
+  <h1 class="text-center mb-4">Train That Muscle!</h1>
+
+  <div class="timer-display" id="timer">60</div>
+  <div class="timer-bar"><div class="timer-bar-fill" id="timerBarFill"></div></div>
+  <div class="score-display">Score: <span id="score">0</span></div>
+  <div class="streak-display">Streak: <span id="streak">0</span>x</div>
+
+  <div class="category-filter">
+    <div class="btn-group" role="group">
+      <button class="btn btn-game active" data-category="all">All Muscles</button>
+      <button class="btn btn-game" data-category="upper">Upper Body</button>
+      <button class="btn btn-game" data-category="lower">Lower Body</button>
+    </div>
+  </div>
+
+  <div class="question-container" id="questionContainer">
+    <h3 id="questionText" class="mb-4"></h3>
+    <div id="answerOptions"></div>
+  </div>
+
+  <div class="game-controls">
+    <button class="btn btn-game" id="startGame">Start Game</button>
+    <button class="btn btn-game" id="tryAgain" style="display: none;">Try Again</button>
+  </div>
+
+  <div class="results-container" id="resultsContainer">
+    <h3 class="text-center mb-4">Game Over!</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Your Results</h4>
+        <p>Final Score: <span id="finalScore">0</span></p>
+        <p>Correct Answers: <span id="correctAnswers">0</span></p>
+        <p>Average Response Time: <span id="avgResponseTime">0</span>s</p>
+        <p>Best Streak: <span id="bestStreak">0</span>x</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Leaderboard</h4>
+        <div class="leaderboard" id="leaderboard"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Questions
+const questions = [
+  {question:"Which muscle helps flex the elbow?",options:["Biceps brachii","Triceps brachii","Deltoid","Latissimus dorsi"],correct:0,category:"upper"},
+  {question:"Which isolation movement trains the chest?",options:["Chest fly","Push-up","Dumbbell bench press","Barbell bench press"],correct:0,category:"upper"},
+  {question:"Which exercise primarily targets the calves?",options:["Standing calf raise","Leg curl","Plank","Barbell row"],correct:0,category:"lower"},
+  {question:"Which movement best develops the trapezius?",options:["Barbell shrug","Preacher curl","Leg extension","Lat pulldown"],correct:0,category:"upper"},
+  {question:"The pectoralis major is activated during?",options:["Bench press","Deadlift","Barbell row","Hip thrust"],correct:0,category:"upper"},
+  {question:"Primary hamstring movement?",options:["Knee flexion","Hip abduction","Shoulder adduction","Elbow extension"],correct:0,category:"lower"},
+  {question:"Which exercise targets the biceps?",options:["Barbell curl","Push-up","Deadlift","Leg extension"],correct:0,category:"upper"},
+  {question:"Compound leg exercise?",options:["Barbell squat","Seated calf raise","Leg curl","Hip abduction machine"],correct:0,category:"lower"},
+  {question:"Best core stabilization move?",options:["Plank","Leg press","Lateral raise","Leg curl"],correct:0,category:"upper"},
+  {question:"Bodyweight for triceps?",options:["Close-grip push-up","Pull-up","Bodyweight squat","Jumping jacks"],correct:0,category:"upper"}
+];
+
+// State
+let currentQuestion=0, score=0, streak=0, timeLeft=60, timer, startTime, responseTimes=[], selectedCategory='all';
+
+// Shuffle util
+function shuffleArray(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }}
+
+// Start
+function startGame(){ shuffleArray(questions); currentQuestion=0; score=0; streak=0; timeLeft=60; responseTimes=[]; document.getElementById('startGame').style.display='none'; document.getElementById('tryAgain').style.display='none'; document.getElementById('resultsContainer').style.display='none'; updateDisplay(); showQuestion(); startTimer(); }
+
+// Timer
+function startTimer(){ document.getElementById('timer').textContent=timeLeft; document.getElementById('timerBarFill').style.width=(timeLeft/60*100)+'%'; timer=setInterval(()=>{ timeLeft--; document.getElementById('timer').textContent=timeLeft; document.getElementById('timerBarFill').style.width=(timeLeft/60*100)+'%'; if(timeLeft<=0) endGame(); },1000); }
+
+// Show question + shuffle answers
+function showQuestion(){ const bucket=questions.filter(q=>selectedCategory==='all'||q.category===selectedCategory); if(currentQuestion>=bucket.length) return endGame(); const q=bucket[currentQuestion]; document.getElementById('questionText').textContent=q.question; const optsArr=q.options.map((opt,i)=>( {text:opt,isCorrect:i===q.correct} )); shuffleArray(optsArr); const container=document.getElementById('answerOptions'); container.innerHTML=''; optsArr.forEach(optObj=>{ const btn=document.createElement('button'); btn.className='answer-option'; btn.textContent=optObj.text; btn.dataset.correct=optObj.isCorrect; btn.onclick=()=>checkAnswer(btn); container.appendChild(btn); }); startTime=Date.now(); }
+
+// Check answer
+function checkAnswer(btn){  const opts=document.querySelectorAll('.answer-option'); opts.forEach(b=>b.disabled=true); const isCorrect=btn.dataset.correct==='true'; const rt=(Date.now()-startTime)/1000; responseTimes.push(rt); if(isCorrect){ btn.classList.add('correct-flash'); score+=10 + (rt<3?5:0); streak++; if(streak>1) showCombo(); } else { btn.classList.add('shake'); const correctBtn=document.querySelector('.answer-option[data-correct="true"]'); correctBtn.classList.add('correct-flash'); score=Math.max(0,score-5); streak=0; } updateDisplay(); setTimeout(() => { currentQuestion++; showQuestion(); }, 800); }
+
+// Update display
+function updateDisplay(){ document.getElementById('score').textContent=score; document.getElementById('streak').textContent=streak; }
+
+// Combo
+function showCombo(){ const combo=document.getElementById('comboBar'); combo.textContent=`🔥 Streak x${streak}!`; combo.style.display='block'; setTimeout(()=>combo.style.display='none',800); }
+
+// End game
+function endGame(){ clearInterval(timer); document.getElementById('finalScore').textContent=score; document.getElementById('correctAnswers').textContent=responseTimes.filter(t=>t<3).length; document.getElementById('avgResponseTime').textContent=((responseTimes.reduce((a,b)=>a+b,0)/responseTimes.length)||0).toFixed(2); document.getElementById('bestStreak').textContent=streak; document.getElementById('resultsContainer').style.display='block'; document.getElementById('tryAgain').style.display='inline-block'; updateLeaderboard(); }
+
+// Leaderboard
+function updateLeaderboard(){ let lb=JSON.parse(localStorage.getItem('leaderboard')||'[]'); lb.push({score,date:new Date().toLocaleDateString()}); lb.sort((a,b)=>b.score-a.score); lb=lb.slice(0,5); localStorage.setItem('leaderboard',JSON.stringify(lb)); document.getElementById('leaderboard').innerHTML=lb.map((e,i)=>`<div class="leaderboard-item">${i+1}. ${e.score}pts (${e.date})</div>`).join(''); }
+
+// Listeners
+document.getElementById('startGame').onclick=startGame; document.getElementById('tryAgain').onclick=startGame; document.querySelectorAll('.category-filter button').forEach(btn=>btn.onclick=e=>{ selectedCategory=e.target.dataset.category; document.querySelectorAll('.category-filter button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); });
+</script>
+
+{% endblock %}
