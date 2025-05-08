@@ -211,3 +211,172 @@ h1 {
     font-size: 1.75rem;
   }
 }
+
+
+/* ========================================
+   Google Fonts
+======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* ========================================
+   Quiz Page Additions
+======================================== */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.quiz-container {
+  background-color: var(--fitness-light);
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.muscle-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid var(--fitness-dark);
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.muscle-image:hover {
+  transform: scale(1.1);
+}
+
+.fun-fact-btn {
+  font-size: 0.9rem;
+  color: var(--fitness-accent);
+  cursor: pointer;
+}
+
+.progress {
+  height: 25px;
+  background-color: var(--fitness-light);
+  border: 1px solid var(--fitness-dark);
+}
+
+.progress-bar {
+  background-color: var(--fitness-accent);
+}
+
+.question-container {
+  display: none;
+}
+
+.question-container.active {
+  display: block;
+}
+
+.navigation-buttons {
+  margin-top: 2rem;
+}
+
+#submit-button {
+  display: none;
+}
+
+.clickable-muscle {
+  fill: transparent;
+  stroke: transparent;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.clickable-muscle:hover {
+  fill: rgba(52, 152, 219, 0.3);
+}
+
+.clickable-muscle.selected {
+  fill: rgba(46, 204, 113, 0.4);
+}
+
+.clickable-muscle.incorrect {
+  fill: rgba(231, 76, 60, 0.4);
+}
+
+.svg-map-container {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  user-select: none;
+  pointer-events: none;
+}
+
+.svg-map-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.svg-map-container .clickable-muscle {
+  pointer-events: auto;
+}
+
+/* Hide unwanted SVG controls */
+#svgDrawingTools,
+#pathControls,
+.drawing-controls,
+.path-editor,
+.svg-controls,
+.coordinate-display {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid #28a745;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.feedback-item {
+  border-left: 4px solid;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.feedback-item.correct {
+  border-left-color: #28a745;
+  background-color: #f8fff8;
+}
+
+.feedback-item.incorrect {
+  border-left-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+.results-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .muscle-image {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media print {
+  .btn {
+    display: none;
+  }
+
+  .card {
+    border: none;
+  }
+
+  .feedback-item {
+    break-inside: avoid;
+  }
+}
