@@ -291,7 +291,7 @@ body {
   fill: rgba(231, 76, 60, 0.4);
 }
 
-.svg-map-container {
+.quiz-svg-container {
   max-width: 500px;
   margin: 0 auto;
   position: relative;
@@ -299,13 +299,13 @@ body {
   pointer-events: none;
 }
 
-.svg-map-container svg {
+.quiz-svg-container svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.svg-map-container .clickable-muscle {
+.quiz-svg-container .clickable-muscle {
   pointer-events: auto;
 }
 
