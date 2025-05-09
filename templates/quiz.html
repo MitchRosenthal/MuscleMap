@@ -3,8 +3,6 @@
 {% block title %}Muscle Quiz – MuscleMap{% endblock %}
 
 {% block content %}
-
-<!-- Quiz content with updated structure -->
 <div class="quiz-container">
   <h1 class="mb-4 text-center">Muscle Strengthening Quiz</h1>
 
@@ -23,13 +21,10 @@
     <div class="mb-4 question-container" data-question-number="1">
       <div class="text-center mb-4">
         <h4>Click the muscle that is primarily worked during bicep curls:</h4>
-        
         <div class="quiz-svg-container">
           <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background muscle anatomy image -->
             <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
                    width="599" height="847" />
-
             <g id="muscle-links">
               <!-- Chest (Pectoralis) -->
               <path id="chest-left" class="clickable-muscle"
@@ -57,7 +52,6 @@
             </g>
           </svg>
         </div>
-        
         <div class="answer-feedback mt-3" style="display: none;"></div>
         <div class="hint mt-2 text-muted">
           <small>Click on the muscle that you think is most targeted during bicep curls</small>
@@ -69,24 +63,21 @@
     <div class="mb-4 question-container" data-question-number="2">
       <div class="text-center mb-4">
         <h4>Click the muscle that is primarily worked during bench press:</h4>
-        
         <div class="quiz-svg-container">
           <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
             <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
                    width="599" height="847" />
             <g id="muscle-links">
-              <!-- Same muscle paths as Q1, but different correct answer -->
+              <!-- Same muscle paths as Q1 -->
               <path id="chest-left" class="clickable-muscle"
                     data-muscle="pectorals"
                     d="M 290,189 L 259,185 L 249,191 L 241,197 L 235,209 L 238,230 L 244,247 L 254,258 L 266,262 L 291,259 L 298,248 L 299,228 L 291,191 Z" />
               <path id="chest-right" class="clickable-muscle"
                     data-muscle="pectorals"
                     d="M 315,190 L 308,204 L 305,221 L 305,247 L 312,258 L 319,262 L 328,264 L 337,264 L 347,260 L 354,254 L 359,243 L 364,229 L 367,218 L 367,213 L 367,206 L 358,195 L 350,190 L 341,187 L 321,189 L 315,192 Z" />
-              <!-- Include other muscles as decoys -->
             </g>
           </svg>
         </div>
-        
         <div class="answer-feedback mt-3" style="display: none;"></div>
         <div class="hint mt-2 text-muted">
           <small>Click on the muscle that is most activated during bench press</small>
@@ -98,7 +89,6 @@
     <div class="mb-4 question-container" data-question-number="3">
       <div class="text-center mb-4">
         <h4>Click the muscle that is primarily worked during lateral raises:</h4>
-        
         <div class="quiz-svg-container">
           <svg viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
             <image href="{{ url_for('static', filename='images/muscle_map.png') }}"
@@ -111,11 +101,9 @@
               <path id="deltoid-right" class="clickable-muscle"
                     data-muscle="deltoid"
                     d="M 343,185 L 359,193 L 369,205 L 373,215 L 381,225 L 386,227 L 390,226 L 392,223 L 394,218 L 394,210 L 394,204 L 392,194 L 390,188 L 385,182 L 379,179 L 373,175 L 367,173 L 362,181 L 353,181 L 343,185 Z" />
-              <!-- Include other muscles as decoys -->
             </g>
           </svg>
         </div>
-        
         <div class="answer-feedback mt-3" style="display: none;"></div>
         <div class="hint mt-2 text-muted">
           <small>Click on the muscle that is most activated during lateral raises</small>
@@ -123,8 +111,7 @@
       </div>
     </div>
 
-    <p>Debug: {{ dropdown_questions|length }} questions loaded.</p>
-
+    <!-- Dropdown Questions -->
     {% for q in dropdown_questions %}
     <div class="mb-4 question-container" data-question-number="{{ q.number }}">
       <div class="text-center mb-4">
@@ -172,7 +159,6 @@
     <button type="button" id="next-button" class="btn btn-primary">Next</button>
     <button type="submit" id="submit-button" class="btn btn-success" style="display: none;">Submit</button>
   </div>
-  
 
   <!-- Inject answer key for JavaScript -->
   <script id="quiz-data" type="application/json">
@@ -182,5 +168,4 @@
   <!-- Include the quiz logic -->
   <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
 </div>
-
 {% endblock %}
