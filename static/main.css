@@ -264,14 +264,6 @@ body {
   background-color: var(--fitness-accent);
 }
 
-.question-container {
-  display: none;
-}
-
-.question-container.active {
-  display: block;
-}
-
 .navigation-buttons {
   margin-top: 2rem;
 }
@@ -434,10 +426,15 @@ body {
 }
 
 .question-container {
+  display: none !important;
   background: white;
   padding: 2rem;
   border-radius: 8px;
   margin-bottom: 2rem;
+}
+
+.question-container.active {
+  display: block !important;
 }
 
 .answer-option {
