@@ -1,5 +1,6 @@
 from flask import Flask, render_template, abort
 from muscle_data import muscles
+from quiz_questions import dropdown_questions
 
 app = Flask(__name__)
 
@@ -25,8 +26,18 @@ def muscle_page(muscle_name, page):
 
 @app.route('/quiz')
 def quiz():
-    # you'll create templates/quiz.html next
-    return render_template('quiz.html')
+    static_answers = {
+        1: {"muscle": "biceps", "exercise": "bicep curls"},
+        2: {"muscle": "pectorals", "exercise": "bench press"},
+        3: {"muscle": "deltoid", "exercise": "lateral raises"},
+    }
+
+    # Populate answers for Q4-Q15 dynamically
+    for i, q in enumerate(dropdown_questions, start=4):
+        static_answers[i] = {"muscle": q["answer"], "exercise": q["question"]}
+
+    return render_template("quiz.html", dropdown_questions=dropdown_questions, question_answers=static_answers)
+
 
 @app.route('/quizgame')
 def quizgame():
