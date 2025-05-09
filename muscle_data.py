@@ -141,5 +141,125 @@ muscles = {
                 }
             ]
         }
+    },
+
+    "triceps": {
+        "name": "Triceps Brachii",
+        "description": "The triceps brachii is a large muscle on the back of the upper arm, consisting of three heads. It is responsible for extending the elbow and plays a crucial role in pushing movements.",
+        "fun_fact": "The triceps makes up about 60% of the upper arm's muscle mass, making it larger than the biceps.",
+        "image": "triceps.png",
+        "videos": [
+            {
+                "title": "Triceps Training Guide",
+                "url": "https://www.youtube.com/embed/nRiJVZDpdL0",
+                "description": "Learn effective triceps exercises including pushdowns, extensions, and dips."
+            }
+        ],
+        "subgroups": ["Long Head", "Lateral Head", "Medial Head"],
+        "quiz": {
+            "questions": [
+                {
+                    "question": "How many heads does the triceps brachii have?",
+                    "choices": ["Two", "Three", "Four"],
+                    "answer": "Three"
+                }
+            ]
+        }
+    },
+
+    "trapezius": {
+        "name": "Trapezius",
+        "description": "The trapezius is a large superficial muscle that extends from the occipital bone to the lower thoracic vertebrae and laterally to the spine of the scapula. It's responsible for moving the scapula and supporting the arm.",
+        "fun_fact": "The trapezius is named for its trapezoid shape and is one of the most complex muscles in the body, with three distinct functional regions.",
+        "image": "trapezius.png",
+        "videos": [
+            {
+                "title": "Trapezius Training",
+                "url": "https://www.youtube.com/embed/3VcKaXpzqRo",
+                "description": "Master shrugs, face pulls, and other exercises to develop your traps."
+            }
+        ],
+        "subgroups": ["Upper", "Middle", "Lower"],
+        "quiz": {
+            "questions": [
+                {
+                    "question": "Which part of the trapezius is primarily responsible for shoulder elevation?",
+                    "choices": ["Upper", "Middle", "Lower"],
+                    "answer": "Upper"
+                }
+            ]
+        }
+    },
+
+    "latissimus": {
+        "name": "Latissimus Dorsi",
+        "description": "The latissimus dorsi is a large, flat muscle on the back that extends from the lower spine to the upper arm. It's responsible for arm adduction, extension, and internal rotation.",
+        "fun_fact": "The latissimus dorsi is the largest muscle in the upper body and is often called the 'lats'.",
+        "image": "latissimus.png",
+        "videos": [
+            {
+                "title": "Lat Training Essentials",
+                "url": "https://www.youtube.com/embed/CAwf7n6Luuc",
+                "description": "Learn pull-ups, lat pulldowns, and rows to build a strong back."
+            }
+        ],
+        "subgroups": ["Upper", "Lower"],
+        "quiz": {
+            "questions": [
+                {
+                    "question": "What is the primary function of the latissimus dorsi?",
+                    "choices": ["Arm abduction", "Arm adduction", "Shoulder flexion"],
+                    "answer": "Arm adduction"
+                }
+            ]
+        }
+    },
+
+    "glutes": {
+        "name": "Gluteus Maximus",
+        "description": "The gluteus maximus is the largest and most superficial of the three gluteal muscles. It's responsible for hip extension, external rotation, and maintaining an upright posture.",
+        "fun_fact": "The gluteus maximus is the largest muscle in the human body and is crucial for bipedal locomotion.",
+        "image": "glutes.png",
+        "videos": [
+            {
+                "title": "Glute Training Guide",
+                "url": "https://www.youtube.com/embed/2pLT-olgUJs",
+                "description": "Master hip thrusts, squats, and deadlifts to build strong glutes."
+            }
+        ],
+        "subgroups": ["Upper", "Lower"],
+        "quiz": {
+            "questions": [
+                {
+                    "question": "Which exercise primarily targets the gluteus maximus?",
+                    "choices": ["Hip Thrusts", "Leg Extensions", "Calf Raises"],
+                    "answer": "Hip Thrusts"
+                }
+            ]
+        }
+    },
+
+    "hamstrings": {
+        "name": "Hamstrings",
+        "description": "The hamstrings are a group of three muscles on the back of the thigh: biceps femoris, semitendinosus, and semimembranosus. They're responsible for knee flexion and hip extension.",
+        "fun_fact": "The hamstrings are named after the way butchers would hang pigs by these tendons, or 'ham strings'.",
+        "image": "hamstrings.png",
+        "videos": [
+            {
+                "title": "Hamstring Training",
+                "url": "https://www.youtube.com/embed/2SHsk9AzdjA",
+                "description": "Learn Romanian deadlifts, leg curls, and other exercises to strengthen your hamstrings."
+            }
+        ],
+        "subgroups": ["Biceps Femoris", "Semitendinosus", "Semimembranosus"],
+        "quiz": {
+            "questions": [
+                {
+                    "question": "How many muscles make up the hamstring group?",
+                    "choices": ["Two", "Three", "Four"],
+                    "answer": "Three"
+                }
+            ]
+        }
     }
 }
