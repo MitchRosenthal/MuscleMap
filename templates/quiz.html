@@ -4,8 +4,6 @@
 
 {% block content %}
 
-<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
-
 <!-- Quiz content with updated structure -->
 <div class="quiz-container">
   <h1 class="mb-4 text-center">Muscle Strengthening Quiz</h1>
@@ -18,9 +16,11 @@
     </div>
   </div>
 
+  <p class="text-center mb-2">Question <span id="current-question">1</span> of 15</p>
+
   <form id="quiz-form" class="text-start">
     <!-- Question 1 -->
-    <div class="mb-4 question-container">
+    <div class="mb-4 question-container" data-question-number="1">
       <div class="text-center mb-4">
         <h4>Click the muscle that is primarily worked during bicep curls:</h4>
         
@@ -66,7 +66,7 @@
     </div>
 
     <!-- Question 2 -->
-    <div class="mb-4 question-container">
+    <div class="mb-4 question-container" data-question-number="2">
       <div class="text-center mb-4">
         <h4>Click the muscle that is primarily worked during bench press:</h4>
         
@@ -95,7 +95,7 @@
     </div>
 
     <!-- Question 3 -->
-    <div class="mb-4 question-container">
+    <div class="mb-4 question-container" data-question-number="3">
       <div class="text-center mb-4">
         <h4>Click the muscle that is primarily worked during lateral raises:</h4>
         
@@ -123,48 +123,64 @@
       </div>
     </div>
 
-  {% set q_number = loop.index + 3 %}
-  <div class="mb-4 question-container" data-question-number="{{ q_number }}">
-    <div class="text-center mb-4">
-      <img src="{{ url_for('static', filename=q.image) }}" 
-           alt="{{ q.alt }}"
-           class="muscle-image img-fluid"
-           data-bs-toggle="tooltip"
-           title="{{ q.tooltip }}"
-           style="width: 150px; height: 150px;">
-    </div>
+    <p>Debug: {{ dropdown_questions|length }} questions loaded.</p>
 
-    <div class="question-content">
-      <div class="d-flex align-items-start mb-2">
-        <label for="q{{ q_number }}" class="form-label mb-0" data-bs-toggle="tooltip" title="{{ q.tooltip }}">
-          {{ q_number }}. {{ q.prompt }}
-        </label>
-      </div>
-      <div class="input-group">
-        <select id="q{{ q_number }}" class="form-select quiz-select">
-          <option value="">Select an answer</option>
-          {% for option in q.options %}
-            <option value="{{ option.value }}">{{ option.text }}</option>
-          {% endfor %}
-        </select>
-        <span class="feedback-icon ms-2" style="display: none;"></span>
+    {% for q in dropdown_questions %}
+    <div class="mb-4 question-container" data-question-number="{{ q.number }}">
+      <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='images/' ~ q.image) }}" 
+             alt="{{ q.alt }}"
+             class="muscle-image img-fluid"
+             data-bs-toggle="tooltip"
+             title="{{ q.alt }}"
+             style="width: 150px; height: 150px;">
       </div>
 
-      <div class="answer-feedback mt-1" style="display: none;"></div>
-      <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
-              data-bs-toggle="collapse" data-bs-target="#fact{{ q_number }}">
-        📚 Show Fun Fact
-      </button>
-      <div id="fact{{ q_number }}" class="collapse mt-2">
-        <div class="card card-body bg-light">
-          {{ q.fact }}
+      <div class="question-content">
+        <div class="d-flex align-items-start mb-2">
+          <label for="q{{ q.number }}" class="form-label mb-0" data-bs-toggle="tooltip" title="{{ q.alt }}">
+            {{ q.number }}. {{ q.question }}
+          </label>
+        </div>
+        <div class="input-group">
+          <select id="q{{ q.number }}" class="form-select quiz-select">
+            <option value="">Select an answer</option>
+            {% for option in q.options %}
+              <option value="{{ option.value }}">{{ option.text }}</option>
+            {% endfor %}
+          </select>
+          <span class="feedback-icon ms-2" style="display: none;"></span>
+        </div>
+
+        <div class="answer-feedback mt-1" style="display: none;"></div>
+        <button type="button" class="btn btn-link fun-fact-btn p-0 mt-2" 
+                data-bs-toggle="collapse" data-bs-target="#fact{{ q.number }}">
+          📚 Show Fun Fact
+        </button>
+        <div id="fact{{ q.number }}" class="collapse mt-2">
+          <div class="card card-body bg-light">
+            {{ q.fun_fact }}
+          </div>
         </div>
       </div>
     </div>
+    {% endfor %}
+  </form>
+
+  <div class="d-flex justify-content-between my-3">
+    <button type="button" id="prev-button" class="btn btn-secondary">Previous</button>
+    <button type="button" id="next-button" class="btn btn-primary">Next</button>
+    <button type="submit" id="submit-button" class="btn btn-success" style="display: none;">Submit</button>
   </div>
-{% endfor %}
+  
 
+  <!-- Inject answer key for JavaScript -->
+  <script id="quiz-data" type="application/json">
+    {{ question_answers | tojson }}
+  </script>
 
-<script>
-  const questionAnswers = {{ question_answers | tojson }};
-</script>
+  <!-- Include the quiz logic -->
+  <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+</div>
+
+{% endblock %}
