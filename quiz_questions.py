@@ -3,7 +3,7 @@ dropdown_questions = [
         "number": 4,
         "image": "triceps.png",
         "alt": "Triceps muscle diagram",
-        "label": "Which exercise primarily targets the triceps?",
+        "question": "Which exercise primarily targets the triceps?",
         "options": [
             {"value": "tricep_dips", "text": "Tricep Dips"},
             {"value": "chin_ups", "text": "Chin Ups"},
@@ -16,7 +16,7 @@ dropdown_questions = [
         "number": 5,
         "image": "glutes.png",
         "alt": "Glutes muscle diagram",
-        "label": "What is the primary muscle targeted in deadlifts?",
+        "question": "What is the primary muscle targeted in deadlifts?",
         "options": [
             {"value": "glutes", "text": "Glutes"},
             {"value": "quads", "text": "Quads"},
@@ -29,7 +29,7 @@ dropdown_questions = [
         "number": 6,
         "image": "gastrocnemius.png",
         "alt": "Calf muscle diagram",
-        "label": "Which muscle is strengthened by calf raises?",
+        "question": "Which muscle is strengthened by calf raises?",
         "options": [
             {"value": "hamstrings", "text": "Hamstrings"},
             {"value": "gastrocnemius", "text": "Gastrocnemius"},
@@ -42,7 +42,7 @@ dropdown_questions = [
         "number": 7,
         "image": "pectorals.png",
         "alt": "Pectorals muscle diagram",
-        "label": "Bench press strengthens which muscle most?",
+        "question": "Bench press strengthens which muscle most?",
         "options": [
             {"value": "pectorals", "text": "Pectorals"},
             {"value": "biceps", "text": "Biceps"},
@@ -55,7 +55,7 @@ dropdown_questions = [
         "number": 8,
         "image": "abdominals.png",
         "alt": "Abdominal muscles diagram",
-        "label": "Which exercise best strengthens the core?",
+        "question": "Which exercise best strengthens the core?",
         "options": [
             {"value": "situps", "text": "Sit-ups"},
             {"value": "pullups", "text": "Pull-ups"},
@@ -68,7 +68,7 @@ dropdown_questions = [
         "number": 9,
         "image": "deltoid.png",
         "alt": "Deltoid muscle diagram",
-        "label": "Lateral raises mainly target which muscle?",
+        "question": "Lateral raises mainly target which muscle?",
         "options": [
             {"value": "deltoid", "text": "Deltoid"},
             {"value": "pectorals", "text": "Pectorals"},
@@ -81,7 +81,7 @@ dropdown_questions = [
         "number": 10,
         "image": "quads.png",
         "alt": "Quadriceps muscle diagram",
-        "label": "Lunges strengthen which of the following?",
+        "question": "Lunges strengthen which of the following?",
         "options": [
             {"value": "quads", "text": "Quads"},
             {"value": "deltoid", "text": "Deltoid"},
@@ -94,7 +94,7 @@ dropdown_questions = [
         "number": 11,
         "image": "latissimus.png",
         "alt": "Latissimus dorsi muscle diagram",
-        "label": "Which muscle group is activated by pull-ups?",
+        "question": "Which muscle group is activated by pull-ups?",
         "options": [
             {"value": "biceps", "text": "Biceps"},
             {"value": "latissimus", "text": "Latissimus Dorsi"},
@@ -107,7 +107,7 @@ dropdown_questions = [
         "number": 12,
         "image": "abdominals.png",
         "alt": "Abdominal muscles diagram",
-        "label": "Ab wheel rollouts work which muscle most?",
+        "question": "Ab wheel rollouts work which muscle most?",
         "options": [
             {"value": "abdominals", "text": "Abdominals"},
             {"value": "hamstrings", "text": "Hamstrings"},
@@ -120,7 +120,7 @@ dropdown_questions = [
         "number": 13,
         "image": "glutes.png",
         "alt": "Glutes muscle diagram",
-        "label": "Hip thrusts are most effective for which muscle?",
+        "question": "Hip thrusts are most effective for which muscle?",
         "options": [
             {"value": "glutes", "text": "Glutes"},
             {"value": "quads", "text": "Quads"},
@@ -133,7 +133,7 @@ dropdown_questions = [
         "number": 14,
         "image": "erector-spinae.png",
         "alt": "Lower back muscles diagram",
-        "label": "Which movement strengthens the lower back?",
+        "question": "Which movement strengthens the lower back?",
         "options": [
             {"value": "superman", "text": "Superman"},
             {"value": "benchpress", "text": "Bench Press"},
@@ -146,7 +146,7 @@ dropdown_questions = [
         "number": 15,
         "image": "hamstrings.png",
         "alt": "Hamstrings muscle diagram",
-        "label": "Which targets hamstrings most effectively?",
+        "question": "Which targets hamstrings most effectively?",
         "options": [
             {"value": "leg_curl", "text": "Leg Curl"},
             {"value": "squats", "text": "Squats"},
