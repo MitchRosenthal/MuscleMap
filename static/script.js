@@ -31,22 +31,102 @@ $(document).ready(function(){
   });
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Progress tracking
+    const totalMuscleGroups = 11;
+    const exploredMuscleGroups = new Set();
+    const progressBar = document.getElementById('explorationProgress');
+
+    // Initialize progress bar to 0
+    progressBar.style.width = '0%';
+    progressBar.setAttribute('aria-valuenow', 0);
+
+    // Map individual muscle IDs to their groups
+    const muscleGroupMap = {
+        // Front view muscles
+        'chest-left': 'chest',
+        'chest-right': 'chest',
+        'deltoid-left': 'shoulders',
+        'deltoid-right': 'shoulders',
+        'bicep-left': 'biceps',
+        'bicep-right': 'biceps',
+        'abs': 'abdominals',
+        'quad-left': 'quadriceps',
+        'quad-right': 'quadriceps',
+        // Back view muscles
+        'triceps-left': 'triceps',
+        'triceps-right': 'triceps',
+        'trapezius-left': 'trapezius',
+        'trapezius-right': 'trapezius',
+        'latissimus-left': 'latissimus',
+        'latissimus-right': 'latissimus',
+        'glutes-left': 'glutes',
+        'glutes-right': 'glutes',
+        'hamstrings-left': 'hamstrings',
+        'hamstrings-right': 'hamstrings',
+        'calf-back-left': 'calves',
+        'calf-back-right': 'calves'
+    };
+
+    function updateProgress(muscleId) {
+        const muscleGroup = muscleGroupMap[muscleId];
+        if (muscleGroup && !exploredMuscleGroups.has(muscleGroup)) {
+            exploredMuscleGroups.add(muscleGroup);
+            const progress = (exploredMuscleGroups.size / totalMuscleGroups) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+            
+            // Store progress in localStorage
+            localStorage.setItem('exploredMuscleGroups', JSON.stringify(Array.from(exploredMuscleGroups)));
+        }
+    }
+
+    // Load saved progress only if it exists
+    const savedProgress = localStorage.getItem('exploredMuscleGroups');
+    if (savedProgress) {
+        try {
+            const savedGroups = JSON.parse(savedProgress);
+            if (Array.isArray(savedGroups) && savedGroups.length > 0) {
+                savedGroups.forEach(group => {
+                    exploredMuscleGroups.add(group);
+                });
+                const progress = (exploredMuscleGroups.size / totalMuscleGroups) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressBar.setAttribute('aria-valuenow', progress);
+            }
+        } catch (e) {
+            console.error('Error loading saved progress:', e);
+            // If there's an error, reset the progress
+            localStorage.removeItem('exploredMuscleGroups');
+            progressBar.style.width = '0%';
+            progressBar.setAttribute('aria-valuenow', 0);
+        }
+    }
+
+    // Add click handlers to all muscle paths
+    const musclePaths = document.querySelectorAll('#muscle-links path, #muscle-links-back path');
+    musclePaths.forEach(path => {
+        path.addEventListener('click', function() {
+            updateProgress(this.id);
+        });
+    });
+
     // Toggle front/back view
     const toggleBtn = document.getElementById('toggleViewBtn');
     const muscleMapImage = document.getElementById('muscleMapImage');
     const muscleLinksFront = document.getElementById('muscle-links');
     const muscleLinksBack = document.getElementById('muscle-links-back');
     let showingFront = true;
+
     if (toggleBtn && muscleMapImage && muscleLinksFront && muscleLinksBack) {
         toggleBtn.addEventListener('click', function() {
             if (showingFront) {
-                muscleMapImage.setAttribute('href', "static/images/pos_muscle_map.png");
+                muscleMapImage.setAttribute('href', "/static/images/pos_muscle_map.png");
                 toggleBtn.textContent = 'Show Front View';
                 showingFront = false;
                 muscleLinksFront.style.display = 'none';
                 muscleLinksBack.style.display = 'block';
             } else {
-                muscleMapImage.setAttribute('href', "static/images/muscle_map.png");
+                muscleMapImage.setAttribute('href', "/static/images/muscle_map.png");
                 toggleBtn.textContent = 'Show Back View';
                 showingFront = true;
                 muscleLinksFront.style.display = 'block';
@@ -54,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+/**
     // Design mode toggle
     const designModeToggle = document.getElementById('designModeToggle');
     let designMode = false;
@@ -197,4 +277,5 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Added point: ${x},${y} (${currentPointType})`);
         });
     }
+    */
 });

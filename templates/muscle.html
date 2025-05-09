@@ -5,23 +5,32 @@
 <div class="content-wrapper">
   <h1>Interactive Muscle Map</h1>
   
+  <!-- Progress Bar -->
+  <div class="progress-container mb-4">
+    <div class="progress">
+      <div id="explorationProgress" class="progress-bar" role="progressbar" 
+           aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      </div>
+    </div>
+  </div>
+
   <!-- Toggle Front/Back Button -->
   <div class="text-center mb-4">
     <button id="toggleViewBtn" class="btn btn-secondary">Show Back View</button>
   </div>
 
   <!-- Design Mode Toggle -->
-  <div class="text-center mb-4">
+  <!--<div class="text-center mb-4">
     <button id="designModeToggle" class="btn">
       Enable Design Mode
     </button>
-  </div>
+  </div>-->
 
   <div class="svg-map-container">
-    <svg id="muscleSVG" viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg">
+    <svg id="muscleSVG" viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <!-- Background muscle anatomy image -->
       <image id="muscleMapImage" href="{{ url_for('static', filename='images/muscle_map.png') }}"
-             width="599" height="847" />
+             width="599" height="847" preserveAspectRatio="xMidYMid meet" />
 
       <!-- Anterior (front) clickable areas -->
       <g id="muscle-links" style="display: block;">
