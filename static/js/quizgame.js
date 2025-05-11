@@ -90,7 +90,7 @@ const questions = [
   
   // Combo
   function showCombo(){ 
-    const combo=document.getElementById('comboBar657'); 
+    const combo=document.getElementById('comboBar'); 
     combo.textContent=`🔥 Streak x${streak}!`; 
     combo.style.display='block'; 
     setTimeout(()=>combo.style.display='none',800); 
