@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}MuscleMap{% endblock %}</title>
+  <title>{% block title %}Mind & Muscle{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- Bootstrap CSS -->
@@ -17,32 +17,38 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
-    <a class="navbar-brand fw-bold" href="{{ url_for('home') }}">💪 MuscleMap</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('muscle_map') }}">Muscle Map</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('quiz') }}">Quiz</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('quizgame') }}">Train That Muscle!</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid px-4">
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand ps-4" href="{{ url_for('home') }}">Mind & Muscle</a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('muscle_map') }}">Muscle Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('quiz') }}">Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('quizgame') }}">Train</a>
+          </li>
+        </ul>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <!-- Page content -->
-  <main class="container py-5 text-center">
+  <main class="main-content">
     {% block content %}{% endblock %}
   </main>
 

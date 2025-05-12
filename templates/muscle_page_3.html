@@ -30,8 +30,8 @@
   </div>
 
   <div class="d-flex justify-content-between mt-4">
-    <a href="{{ url_for('muscle_map') }}" class="btn btn-outline-accent">
-      <i class="fas fa-map me-2"></i>Back to Muscle Map
+    <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=2) }}" class="btn btn-outline-accent">
+      <i class="fas fa-arrow-left me-2"></i>Back to How to Train
     </a>
     <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}" class="btn btn-accent">
       Take the Quiz <i class="fas fa-arrow-right ms-2"></i>

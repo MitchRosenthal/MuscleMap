@@ -32,20 +32,40 @@ h1 {
 ======================================== */
 .hero {
   background: linear-gradient(135deg, var(--fitness-dark), var(--fitness-accent));
-  padding: 5rem 0;
+  padding: 6rem 0;
   color: white;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.hero h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 3.5rem;
+.hero .container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.hero-title {
+  white-space: nowrap;
+  font-size: 3.2rem;
+  letter-spacing: -0.5px;
   margin-bottom: 1.5rem;
-  background: linear-gradient(45deg, #ffffff, #e0f7ff, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  color: white;
+  -webkit-text-fill-color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero p {
@@ -53,6 +73,7 @@ h1 {
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto 2rem;
+  text-align: center;
 }
 
 /* CTA Button */
@@ -73,13 +94,14 @@ h1 {
 
 /* Feature cards */
 .feature-card {
-  background: white;
+  background: var(--fitness-light);
   border: none;
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  height: 100%;
 }
 
 .feature-card:hover {
@@ -87,9 +109,8 @@ h1 {
 }
 
 .feature-icon {
-  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
   color: var(--fitness-accent);
-  margin-bottom: 1rem;
 }
 
 /* Footer */
@@ -97,7 +118,7 @@ h1 {
   background-color: var(--fitness-dark);
   color: white;
   padding: 2rem 0;
-  margin-top: 4rem;
+  margin-top: 0;
 }
 
 /* ========================================
@@ -249,14 +270,19 @@ h1 {
 }
 
 .main-content {
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 /* ========================================
    Responsive Adjustments
 ======================================== */
 @media (max-width: 768px) {
+  .hero {
+    padding: 4rem 0;
+  }
+
   .hero h1 {
     font-size: 2.5rem;
   }
@@ -267,7 +293,7 @@ h1 {
   }
 
   .feature-card {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .svg-map-container {
@@ -278,6 +304,10 @@ h1 {
 
   h1 {
     font-size: 1.75rem;
+  }
+
+  .cta-section {
+    padding: 2rem 0;
   }
 }
 
@@ -1007,3 +1037,116 @@ body {
   }
 }
 
+.quiz-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--fitness-light);
+  border: 2px solid var(--fitness-accent);
+}
+
+.form-check-input {
+  width: 1.5em;
+  height: 1.5em;
+  margin-top: 0.25em;
+}
+
+.form-check-label {
+  padding-left: 0.5em;
+}
+
+.alert {
+  font-size: 1.25rem;
+  padding: 1rem 1.5rem;
+}
+
+/* New features section styles */
+.features-section {
+  padding: 4rem 0;
+  background-color: white;
+}
+
+/* New CTA section styles */
+.cta-section {
+  padding: 3rem 0;
+  background-color: var(--fitness-light);
+  margin-top: 0;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    white-space: normal;
+  }
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #0F2F28;
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: -0.5px;
+  margin-right: 3rem;
+}
+
+.navbar-nav {
+  gap: 2rem;
+}
+
+.navbar-nav:first-child {
+  margin-right: auto;
+}
+
+.navbar-nav.ms-auto {
+  margin-left: 2rem !important;
+}
+
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--fitness-accent) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .navbar-brand {
+    margin-right: 1.5rem;
+  }
+  
+  .navbar-nav {
+    gap: 1rem;
+  }
+  
+  .navbar-collapse {
+    background-color: #0F2F28;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+  }
+  
+  .navbar-nav.ms-auto {
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+  }
+}
