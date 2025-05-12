@@ -1,45 +1,57 @@
 muscles = {
-    "chest": {
-        "name": "Pectoralis Major",
-        "description": "The pectoralis major is a thick, fan-shaped muscle located at the chest (anterior) of the human body. It is responsible for movements such as pushing, bringing the arms together, and lifting.",
-        "fun_fact": "The pec major has two heads — the clavicular and the sternal — allowing it to assist in both shoulder flexion and adduction.",
-        "image": "chest.png",
-        "actions": [
-        {
-            "name": "Horizontal Shoulder Adduction",
-            "description": "Moving the arm across the chest in a horizontal plane. This is the primary movement in exercises like bench presses and chest flies.",
-            "gif": "horizontal_shoulder_adduction.gif"
-        },
-        {
-            "name": "Shoulder Adduction",
-            "description": "Lowering the arm from an elevated side position down to the torso. Helps engage the sternal fibers of the pectoralis major.",
-            "gif": "shoulder_adduction.gif"
-        },
-        {
-            "name": "Shoulder Flexion",
-            "description": "Raising the arm straight in front of the body. Targets the clavicular (upper) head of the chest.",
-            "gif": "shoulder_flexion.gif"
-        }
-        ],
-
-        "videos": [
-            {
-                "title": "How to Target Your Chest",
-                "url": "https://www.youtube.com/embed/vcBig73ojpE",
-                "description": "Learn how to properly perform bench presses and push-ups to build your chest."
-            }
-        ],
-        "subgroups": ["Clavicular Head", "Sternal Head"],
-        "quiz": {
-            "questions": [
-                {
-                    "question": "What is the primary function of the pectoralis major?",
-                    "choices": ["Hip flexion", "Shoulder adduction", "Knee extension"],
-                    "answer": "Shoulder adduction"
-                }
-            ]
-        }
+"chest": {
+  "name": "Pectoralis Major",
+  "description": "The pectoralis major is a thick, fan-shaped muscle located at the chest (anterior) of the human body. It is responsible for movements such as pushing, bringing the arms together, and lifting.",
+  "fun_fact": "The pec major has two heads — the clavicular and the sternal — allowing it to assist in both shoulder flexion and adduction.",
+  "image": "chest.png",
+  "actions": [
+    {
+      "name": "Horizontal Shoulder Adduction",
+      "description": "Moving the arm across the chest in a horizontal plane. This is the primary movement in exercises like bench presses and chest flies.",
+      "gif": "horizontal_shoulder_adduction.gif"
     },
+    {
+      "name": "Shoulder Adduction",
+      "description": "Lowering the arm from an elevated side position down to the torso. Helps engage the sternal fibers of the pectoralis major.",
+      "gif": "shoulder_adduction.gif"
+    },
+    {
+      "name": "Shoulder Flexion",
+      "description": "Raising the arm straight in front of the body. Targets the clavicular (upper) head of the chest.",
+      "gif": "shoulder_flexion.gif"
+    }
+  ],
+  "exercises": [
+    {
+      "type": "Compound",
+      "name": "Barbell Bench Press",
+      "description": "A fundamental compound lift that engages the pectoralis major, triceps, and anterior deltoids. Ideal for building chest mass and strength.",
+      "gif": "bench_press.gif"
+    },
+    {
+      "type": "Bodyweight",
+      "name": "Push-Up",
+      "description": "A classic bodyweight exercise that targets the chest, shoulders, and triceps. Great for functional strength and endurance.",
+      "gif": "push_up.gif"
+    },
+    {
+      "type": "Isolation",
+      "name": "Chest Fly",
+      "description": "An isolation movement that stretches and contracts the pecs through a full range of motion. Often performed with dumbbells or cables.",
+      "gif": "chest_fly.gif"
+    }
+  ],
+  "subgroups": ["Clavicular Head", "Sternal Head"],
+  "quiz": {
+    "questions": [
+      {
+        "question": "What is the primary function of the pectoralis major?",
+        "choices": ["Hip flexion", "Shoulder adduction", "Knee extension"],
+        "answer": "Shoulder adduction"
+      }
+    ]
+  }
+},
 
     "shoulders": {
         "name": "Deltoids",
