@@ -103,14 +103,72 @@ h1 {
 /* ========================================
    Muscle Map Container & Interactions
 ======================================== */
-.svg-map-container {
-  position: relative;
+.muscle-map-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.muscle-groups-list {
+  flex: 0 0 250px;
   background-color: var(--fitness-light);
   border-radius: 12px;
   padding: 1.5rem;
-  margin: 2rem auto;
-  max-width: 600px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.muscle-groups-list h3 {
+  color: var(--fitness-dark);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.muscle-groups-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.muscle-groups-list li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.muscle-groups-list li.visited {
+  background-color: var(--fitness-accent);
+  color: white;
+}
+
+.muscle-groups-list li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.muscle-groups-list .check-mark {
+  color: var(--fitness-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.muscle-groups-list li.visited .check-mark {
+  opacity: 1;
+}
+
+.svg-map-container {
+  flex: 1;
+  max-width: 600px;
+  margin: 0;
 }
 
 .svg-map-container svg {
@@ -122,8 +180,9 @@ h1 {
 
 .svg-map-container svg path,
 .svg-map-container svg polygon {
-  fill: transparent;
-  stroke: transparent;
+  fill: rgba(255, 0, 0, 0.3);
+  stroke: rgba(255, 0, 0, 0.8);
+  stroke-width: 1;
   transition: all 0.3s ease;
   cursor: pointer;
 }

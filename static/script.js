@@ -31,15 +31,6 @@ $(document).ready(function(){
   });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Progress tracking
-    const totalMuscleGroups = 11;
-    const exploredMuscleGroups = new Set();
-    const progressBar = document.getElementById('explorationProgress');
-
-    // Initialize progress bar to 0
-    progressBar.style.width = '0%';
-    progressBar.setAttribute('aria-valuenow', 0);
-
     // Map individual muscle IDs to their groups
     const muscleGroupMap = {
         // Front view muscles
@@ -67,46 +58,35 @@ document.addEventListener('DOMContentLoaded', function() {
         'calf-back-right': 'calves'
     };
 
-    function updateProgress(muscleId) {
-        const muscleGroup = muscleGroupMap[muscleId];
-        if (muscleGroup && !exploredMuscleGroups.has(muscleGroup)) {
-            exploredMuscleGroups.add(muscleGroup);
-            const progress = (exploredMuscleGroups.size / totalMuscleGroups) * 100;
-            progressBar.style.width = `${progress}%`;
-            progressBar.setAttribute('aria-valuenow', progress);
-            
-            // Store progress in localStorage
-            localStorage.setItem('exploredMuscleGroups', JSON.stringify(Array.from(exploredMuscleGroups)));
-        }
-    }
-
-    // Load saved progress only if it exists
-    const savedProgress = localStorage.getItem('exploredMuscleGroups');
-    if (savedProgress) {
-        try {
-            const savedGroups = JSON.parse(savedProgress);
-            if (Array.isArray(savedGroups) && savedGroups.length > 0) {
-                savedGroups.forEach(group => {
-                    exploredMuscleGroups.add(group);
-                });
-                const progress = (exploredMuscleGroups.size / totalMuscleGroups) * 100;
-                progressBar.style.width = `${progress}%`;
-                progressBar.setAttribute('aria-valuenow', progress);
+    // Load and display visited muscles
+    const visitedMuscles = JSON.parse(localStorage.getItem('visitedMuscles') || '[]');
+    visitedMuscles.forEach(muscle => {
+        const group = muscleGroupMap[muscle];
+        if (group) {
+            const element = document.getElementById(`${group}-group`);
+            if (element) {
+                element.classList.add('visited');
             }
-        } catch (e) {
-            console.error('Error loading saved progress:', e);
-            // If there's an error, reset the progress
-            localStorage.removeItem('exploredMuscleGroups');
-            progressBar.style.width = '0%';
-            progressBar.setAttribute('aria-valuenow', 0);
         }
-    }
+    });
 
     // Add click handlers to all muscle paths
     const musclePaths = document.querySelectorAll('#muscle-links path, #muscle-links-back path');
     musclePaths.forEach(path => {
         path.addEventListener('click', function() {
-            updateProgress(this.id);
+            const muscleId = this.id;
+            const group = muscleGroupMap[muscleId];
+            if (group) {
+                const visitedMuscles = JSON.parse(localStorage.getItem('visitedMuscles') || '[]');
+                if (!visitedMuscles.includes(muscleId)) {
+                    visitedMuscles.push(muscleId);
+                    localStorage.setItem('visitedMuscles', JSON.stringify(visitedMuscles));
+                    const element = document.getElementById(`${group}-group`);
+                    if (element) {
+                        element.classList.add('visited');
+                    }
+                }
+            }
         });
     });
 
@@ -120,13 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (toggleBtn && muscleMapImage && muscleLinksFront && muscleLinksBack) {
         toggleBtn.addEventListener('click', function() {
             if (showingFront) {
-                muscleMapImage.setAttribute('href', "/static/images/pos_muscle_map.png");
+                muscleMapImage.setAttribute('href', muscleMapImage.getAttribute('data-back-image'));
                 toggleBtn.textContent = 'Show Front View';
                 showingFront = false;
                 muscleLinksFront.style.display = 'none';
                 muscleLinksBack.style.display = 'block';
             } else {
-                muscleMapImage.setAttribute('href', "/static/images/muscle_map.png");
+                muscleMapImage.setAttribute('href', muscleMapImage.getAttribute('data-front-image'));
                 toggleBtn.textContent = 'Show Back View';
                 showingFront = true;
                 muscleLinksFront.style.display = 'block';
@@ -248,8 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         svg.addEventListener('click', function(e) {
-            // Only if design mode is enabled (optional: remove this check if you want always-on)
-            // if (!document.getElementById('designModeToggle').textContent.includes('Disable')) return;
             const pt = svg.createSVGPoint();
             pt.x = e.clientX;
             pt.y = e.clientY;
@@ -277,5 +255,5 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Added point: ${x},${y} (${currentPointType})`);
         });
     }
-    */
+        */
 });
