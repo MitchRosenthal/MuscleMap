@@ -1,8 +1,12 @@
 from flask import Flask, render_template, abort
 from muscle_data import muscles
 from quiz_questions import dropdown_questions
+import uuid  # Add this import
 
 app = Flask(__name__)
+
+# Generate a unique session ID that changes on server reload
+SESSION_ID = str(uuid.uuid4())
 
 @app.route('/')
 def home():
@@ -10,7 +14,7 @@ def home():
 
 @app.route('/muscle')
 def muscle_map():
-    return render_template('muscle.html')
+    return render_template('muscle.html', session_id=SESSION_ID)  # Pass session ID to template
 
 @app.route('/muscle/<muscle_name>/page/<int:page>')
 def muscle_page(muscle_name, page):

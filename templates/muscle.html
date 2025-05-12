@@ -3,7 +3,14 @@
 {% block content %}
 
 <div class="content-wrapper">
+  <!-- Session ID for tracking server reloads -->
+  <div id="session-id" style="display: none;">{{ session_id }}</div>
+
   <h1>Interactive Muscle Map</h1>
+
+  <div class="mt-4 text-center">
+    <a href="{{ url_for('quiz') }}" id="quiz-button" class="btn btn-cta" style="display: none;">Think you know it all? Take the quiz!</a>
+  </div>
 
   <!-- Toggle Front/Back Button -->
   <div class="text-center mb-4">

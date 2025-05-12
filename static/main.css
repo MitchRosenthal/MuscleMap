@@ -243,8 +243,13 @@ h1 {
 }
 
 .content-wrapper {
-  padding: 2rem;
   max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.main-content {
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -896,5 +901,109 @@ body {
 
 .carousel-indicators .active {
   opacity: 1;
+}
+
+/* Quiz Button Styling */
+#quiz-button {
+    background-color: var(--fitness-dark);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    margin: 2rem auto;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    border: 2px solid var(--fitness-accent);
+}
+
+#quiz-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    background-color: var(--fitness-accent);
+    color: white;
+    text-decoration: none;
+}
+
+#quiz-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* ========================================
+   Progress Tracker Styles
+======================================== */
+.progress-tracker {
+  flex: 0 0 250px;
+  background-color: var(--fitness-light);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  height: fit-content;
+  position: absolute;
+  left: 2rem;
+}
+
+.progress-tracker ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.progress-tracker li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.progress-tracker li.completed {
+  background-color: var(--fitness-accent);
+  color: white;
+}
+
+.progress-tracker li.current {
+  background-color: var(--fitness-dark);
+  color: white;
+}
+
+.progress-tracker li.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.progress-tracker .check-mark {
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.progress-tracker li.completed .check-mark {
+  opacity: 1;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .muscle-page .content-wrapper {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .muscle-page .main-content {
+    margin-left: 0;
+  }
+
+  .progress-tracker {
+    position: relative;
+    left: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 }
 

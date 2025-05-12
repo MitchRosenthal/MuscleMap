@@ -14,7 +14,7 @@ $(document).ready(function(){
             y1 = Math.min(...ys),
             y2 = Math.max(...ys);
   
-      // add highlight div
+       // add highlight div
       const $hl = $('<div class="muscle-highlight"></div>').css({
         top:    y1,
         left:   x1,
@@ -31,6 +31,16 @@ $(document).ready(function(){
   });
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Get current session ID
+    const currentSessionId = document.getElementById('session-id').textContent;
+    
+    // Check if we need to clear localStorage (different session)
+    const storedSessionId = localStorage.getItem('sessionId');
+    if (storedSessionId !== currentSessionId) {
+        localStorage.clear();
+        localStorage.setItem('sessionId', currentSessionId);
+    }
+
     // Map individual muscle IDs to their groups
     const muscleGroupMap = {
         // Front view muscles
@@ -60,35 +70,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load and display visited muscles
     const visitedMuscles = JSON.parse(localStorage.getItem('visitedMuscles') || '[]');
-    visitedMuscles.forEach(muscle => {
-        const group = muscleGroupMap[muscle];
-        if (group) {
-            const element = document.getElementById(`${group}-group`);
-            if (element) {
-                element.classList.add('visited');
-            }
+    visitedMuscles.forEach(muscleId => {
+        const groupId = muscleGroupMap[muscleId];
+        if (groupId) {
+            document.getElementById(`${groupId}-group`).classList.add('visited');
         }
     });
 
+    // Check if all muscle groups are visited
+    function checkAllMusclesVisited() {
+        const uniqueGroups = new Set(Object.values(muscleGroupMap));
+        const visitedGroups = new Set(visitedMuscles.map(id => muscleGroupMap[id]));
+        const quizButton = document.getElementById('quiz-button');
+        if (uniqueGroups.size === visitedGroups.size) {
+            quizButton.style.display = 'inline-block';
+        }
+    }
+
     // Add click handlers to all muscle paths
-    const musclePaths = document.querySelectorAll('#muscle-links path, #muscle-links-back path');
-    musclePaths.forEach(path => {
+    document.querySelectorAll('#muscle-links path, #muscle-links-back path').forEach(path => {
         path.addEventListener('click', function() {
             const muscleId = this.id;
-            const group = muscleGroupMap[muscleId];
-            if (group) {
-                const visitedMuscles = JSON.parse(localStorage.getItem('visitedMuscles') || '[]');
-                if (!visitedMuscles.includes(muscleId)) {
-                    visitedMuscles.push(muscleId);
-                    localStorage.setItem('visitedMuscles', JSON.stringify(visitedMuscles));
-                    const element = document.getElementById(`${group}-group`);
-                    if (element) {
-                        element.classList.add('visited');
-                    }
+            if (!visitedMuscles.includes(muscleId)) {
+                visitedMuscles.push(muscleId);
+                localStorage.setItem('visitedMuscles', JSON.stringify(visitedMuscles));
+                const groupId = muscleGroupMap[muscleId];
+                if (groupId) {
+                    document.getElementById(`${groupId}-group`).classList.add('visited');
                 }
+                checkAllMusclesVisited();
             }
         });
     });
+
+    // Check on initial load
+    checkAllMusclesVisited();
 
     // Toggle front/back view
     const toggleBtn = document.getElementById('toggleViewBtn');
