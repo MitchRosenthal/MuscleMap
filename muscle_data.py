@@ -4,6 +4,24 @@ muscles = {
         "description": "The pectoralis major is a thick, fan-shaped muscle located at the chest (anterior) of the human body. It is responsible for movements such as pushing, bringing the arms together, and lifting.",
         "fun_fact": "The pec major has two heads — the clavicular and the sternal — allowing it to assist in both shoulder flexion and adduction.",
         "image": "chest.png",
+        "actions": [
+        {
+            "name": "Horizontal Shoulder Adduction",
+            "description": "Moving the arm across the chest in a horizontal plane. This is the primary movement in exercises like bench presses and chest flies.",
+            "gif": "horizontal_shoulder_adduction.gif"
+        },
+        {
+            "name": "Shoulder Adduction",
+            "description": "Lowering the arm from an elevated side position down to the torso. Helps engage the sternal fibers of the pectoralis major.",
+            "gif": "shoulder_adduction.gif"
+        },
+        {
+            "name": "Shoulder Flexion",
+            "description": "Raising the arm straight in front of the body. Targets the clavicular (upper) head of the chest.",
+            "gif": "shoulder_flexion.gif"
+        }
+        ],
+
         "videos": [
             {
                 "title": "How to Target Your Chest",
