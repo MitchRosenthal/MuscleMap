@@ -795,3 +795,82 @@ body {
   transform: scale(1.05);
 }
 
+/* ====================================== */
+/*              muscle_page_1             */
+/* ====================================== */
+.muscle-info {
+  background-color: var(--fitness-light);
+  border-left: 5px solid var(--fitness-accent);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  color: var(--fitness-dark);
+}
+
+.muscle-info img {
+  max-height: 300px;
+  width: auto;
+  display: block;
+  margin: 0 auto 1rem auto;
+  object-fit: contain;
+}
+
+.text-accent {
+  color: var(--fitness-accent);
+}
+
+.fun-fact-box {
+  background-color: white;
+  border-left: 4px solid var(--fitness-accent);
+}
+
+.btn-accent {
+  background-color: var(--fitness-accent);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  background-color: var(--fitness-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* prev and next buttons */
+.btn-outline-accent {
+  border: 2px solid var(--fitness-accent);
+  color: var(--fitness-accent);
+  background: transparent;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-accent:hover {
+  background-color: var(--fitness-accent);
+  color: white;
+}
+
+.carousel-instruction {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--fitness-dark);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  padding: 12px;
+}
+.carousel-instruction.unlocked {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.carousel-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--fitness-accent);
+}
+
