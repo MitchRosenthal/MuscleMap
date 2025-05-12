@@ -50,6 +50,18 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+
+    <div class="carousel-indicators mt-2 mb-3">
+      {% for action in muscle.actions %}
+        <button type="button"
+                data-bs-target="#actionCarousel"
+                data-bs-slide-to="{{ loop.index0 }}"
+                class="{% if loop.first %}active{% endif %}"
+                aria-current="{% if loop.first %}true{% endif %}"
+                aria-label="Slide {{ loop.index }}">
+        </button>
+      {% endfor %}
+    </div>
   </div>
   
   <div class="navigation-buttons d-flex justify-content-center gap-3 mt-4 flex-wrap">
