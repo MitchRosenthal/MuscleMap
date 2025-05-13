@@ -430,6 +430,43 @@ muscles = {
         "description": "The latissimus dorsi is a large, flat muscle on the back that extends from the lower spine to the upper arm. It's responsible for arm adduction, extension, and internal rotation.",
         "fun_fact": "The latissimus dorsi is the largest muscle in the upper body and is often called the 'lats'.",
         "image": "latissimus.png",
+        "actions": [
+            {
+                "name": "Arm Adduction",
+                "description": "Moving the arm down toward the body from an elevated position. This is the primary movement of the latissimus dorsi, as seen in pull-ups and lat pulldowns.",
+                "gif": "arm_adduction.gif"
+            },
+            {
+                "name": "Arm Extension",
+                "description": "Moving the arm backward from the front of the body. The lats work with the posterior deltoids in this movement.",
+                "gif": "arm_extension.gif"
+            },
+            {
+                "name": "Internal Rotation",
+                "description": "Rotating the arm inward toward the body. This movement is important for pulling exercises and shoulder stability.",
+                "gif": "internal_rotation.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Pull-Up",
+                "description": "A fundamental compound exercise that primarily targets the latissimus dorsi. Great for building back width and overall upper body strength.",
+                "gif": "pull_up.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Lat Pulldown",
+                "description": "A compound exercise that targets the lats while allowing for easier progression than pull-ups. Excellent for developing back width.",
+                "gif": "lat_pulldown.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Bent-Over Row",
+                "description": "A compound exercise that targets the lats while also engaging the middle back and rear deltoids. Great for overall back thickness.",
+                "gif": "bent_over_row.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Lat Training Essentials",
