@@ -202,20 +202,39 @@ muscles = {
         "description": "The trapezius is a large superficial muscle that extends from the occipital bone to the lower thoracic vertebrae and laterally to the spine of the scapula. It's responsible for moving the scapula and supporting the arm.",
         "fun_fact": "The trapezius is named for its trapezoid shape and is one of the most complex muscles in the body, with three distinct functional regions.",
         "image": "trapezius.png",
-        "videos": [
-            {
-                "title": "Trapezius Training",
-                "url": "https://www.youtube.com/embed/3VcKaXpzqRo",
-                "description": "Master shrugs, face pulls, and other exercises to develop your traps."
-            }
-        ],
+        "actions": [
+        {
+        "name": "Scapular Elevation",
+        "description": "Lifting the shoulders up. Common movement used in exercises like shrugs.",
+        "gif": "scapular_elevation.gif"
+        },
+        {
+        "name": "Scaplar Retraction",
+        "description": "Pulling the shoulder blades toward the spine. Engages the middle fibers of the trapezius to stabilize posture and assist in pulling movements.",
+        "gif": "Seated-Scapular-Retraction-Exercise-1.gif"
+        },
+    ],
+        "exercises": [
+    {
+      "type": "Isolation",
+      "name": "Barbell Shrug",
+      "description": "An isolation exercise that targets the upper trapezius by elevating the scapula. Helps develop trap size and neck/shoulder definition.",
+      "gif": "Barbell-Shrug.gif"
+    },
+    {
+      "type": "Compound",
+      "name": "Face Pulls",
+      "description": "A cable-based compound movement that engages the middle trapezius, rear deltoids, and rotator cuff muscles. Great for posture and scapular retraction.",
+      "gif": "FACE_PULL.gif"
+    },
+  ],
         "subgroups": ["Upper", "Middle", "Lower"],
         "quiz": {
             "questions": [
                 {
-                    "question": "Which part of the trapezius is primarily responsible for shoulder elevation?",
-                    "choices": ["Upper", "Middle", "Lower"],
-                    "answer": "Upper"
+                    "question": "What movement is performed when the scapula is pulled toward the spine?",
+                    "choices": ["Scapular Elevation", "Scapular Depression", "Scapular Retraction"],
+                    "answer": "Scapular Retraction"
                 }
             ]
         }
