@@ -367,12 +367,12 @@ muscles = {
   {
     "name": "Elbow Extension",
     "description": "Straightening the arm at the elbow joint. This is the primary movement of the triceps brachii, used in pressing and pushing actions.",
-    "gif": "elbow_extension.gif"
+    "gif": "elbowextension.gif"
   },
   {
     "name": "Shoulder Flexion",
     "description": "Raising the arm in front of the body. In some tricep exercises, this motion contributes to activating the long head of the triceps.",
-    "gif": "shoulder_flexion.gif"
+    "gif": "shoulderflex.gif"
   }
 ],
 "exercises": [
