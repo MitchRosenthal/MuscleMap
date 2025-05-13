@@ -6,17 +6,20 @@
   <!-- Progress Tracker -->
   <div class="progress-tracker">
     <ul>
-      <li class="completed" data-page="1">
+      <li class="completed" data-page="1" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=1) }}">
         <span class="check-mark">✓</span>
         Muscle Overview
       </li>
-      <li class="current" data-page="2">
+      <li class="current" data-page="2" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=2) }}">
+        <span class="check-mark">✓</span>
         How to Train
       </li>
-      <li class="locked" data-page="3">
+      <li class="locked" data-page="3" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=3) }}">
+        <span class="check-mark">✓</span>
         Subgroups
       </li>
-      <li class="locked" data-page="4">
+      <li class="locked" data-page="4" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}">
+        <span class="check-mark">✓</span>
         Quiz
       </li>
     </ul>
