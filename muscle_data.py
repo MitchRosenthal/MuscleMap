@@ -529,7 +529,7 @@ muscles = {
             {
                 "name": "External Rotation",
                 "description": "The biceps femoris, one of the hamstring muscles, assists in rotating the lower leg outward. This movement is important for dynamic activities and knee stability.",
-                "gif": "external_rotation.gif"
+                "gif": "Hamstrings-animation.gif"
             }
         ],
         "exercises": [
