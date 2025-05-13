@@ -58,6 +58,43 @@ muscles = {
         "description": "The deltoid is a rounded, triangular muscle located on the uppermost part of the arm and the top of the shoulder. It plays a key role in arm rotation and lifting.",
         "fun_fact": "The deltoid is named after the Greek letter delta (Δ), because of its triangular shape.",
         "image": "shoulders.png",
+        "actions": [
+            {
+                "name": "Shoulder Abduction",
+                "description": "Raising the arm out to the side, away from the body. This is the primary movement in exercises like lateral raises.",
+                "gif": "shoulder_abduction.gif"
+            },
+            {
+                "name": "Shoulder Flexion",
+                "description": "Raising the arm forward in front of the body. This movement primarily engages the anterior (front) deltoid.",
+                "gif": "shoulder_flexion.gif"
+            },
+            {
+                "name": "Shoulder Extension",
+                "description": "Moving the arm backward behind the body. This movement primarily engages the posterior (rear) deltoid.",
+                "gif": "shoulder_extension.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Overhead Press",
+                "description": "A fundamental compound lift that targets all three heads of the deltoid, with emphasis on the anterior and lateral heads. Great for building overall shoulder strength and mass.",
+                "gif": "overhead_press.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Lateral Raise",
+                "description": "An isolation exercise that specifically targets the lateral (middle) deltoid. Essential for building shoulder width and creating the 'capped' deltoid look.",
+                "gif": "lateral_raise.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Face Pull",
+                "description": "An isolation exercise that primarily targets the posterior (rear) deltoid. Important for shoulder health and balanced development.",
+                "gif": "face_pull.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Shoulder Training 101",
@@ -82,6 +119,43 @@ muscles = {
         "description": "The biceps brachii is a two-headed muscle located on the upper arm between the shoulder and the elbow. It is responsible for flexing the elbow and rotating the forearm.",
         "fun_fact": "The word 'biceps' means 'two heads,' referring to the short and long heads of the muscle.",
         "image": "biceps.png",
+        "actions": [
+            {
+                "name": "Elbow Flexion",
+                "description": "Bending the elbow to bring the forearm closer to the upper arm. This is the primary movement in exercises like bicep curls.",
+                "gif": "elbow_flexion.gif"
+            },
+            {
+                "name": "Forearm Supination",
+                "description": "Rotating the forearm to turn the palm upward. This movement engages both heads of the biceps and is important for full bicep development.",
+                "gif": "forearm_supination.gif"
+            },
+            {
+                "name": "Shoulder Flexion",
+                "description": "Raising the arm forward in front of the body. The long head of the biceps assists in this movement.",
+                "gif": "shoulder_flexion.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Chin-Up",
+                "description": "A compound exercise that primarily targets the biceps while also engaging the back muscles. Great for building overall upper body strength.",
+                "gif": "chin_up.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Dumbbell Curl",
+                "description": "A classic isolation exercise that targets both heads of the biceps. Can be performed with various grips to emphasize different aspects of the muscle.",
+                "gif": "dumbbell_curl.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Hammer Curl",
+                "description": "An isolation exercise that targets the biceps while also engaging the brachialis and brachioradialis. Helps build overall arm thickness.",
+                "gif": "hammer_curl.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "How to Target Your Biceps",
@@ -106,6 +180,43 @@ muscles = {
         "description": "The rectus abdominis is a long, flat muscle that extends along the front of the abdomen. It's known as the 'six-pack' muscle and is responsible for trunk flexion.",
         "fun_fact": "The rectus abdominis is segmented by tendinous intersections, which create the visible 'six-pack' appearance.",
         "image": "abdominals.png",
+        "actions": [
+            {
+                "name": "Trunk Flexion",
+                "description": "Bending the spine forward, bringing the ribcage closer to the pelvis. This is the primary movement in exercises like crunches.",
+                "gif": "trunk_flexion.gif"
+            },
+            {
+                "name": "Pelvic Tilt",
+                "description": "Rotating the pelvis upward, bringing the pubic bone closer to the ribcage. This movement primarily targets the lower abdominals.",
+                "gif": "pelvic_tilt.gif"
+            },
+            {
+                "name": "Lateral Flexion",
+                "description": "Bending the trunk to the side. This movement engages the obliques and helps with core stability.",
+                "gif": "lateral_flexion.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Plank",
+                "description": "A fundamental core exercise that builds stability and endurance. Engages the entire abdominal wall and helps develop core strength.",
+                "gif": "plank.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Cable Crunch",
+                "description": "An isolation exercise that targets the rectus abdominis. Provides constant tension throughout the movement for effective muscle engagement.",
+                "gif": "cable_crunch.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Leg Raise",
+                "description": "An isolation exercise that primarily targets the lower abdominals. Great for developing the lower portion of the rectus abdominis.",
+                "gif": "leg_raise.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Train Your Abs Properly",
@@ -130,6 +241,43 @@ muscles = {
         "description": "The quadriceps femoris is a large muscle group on the front of the thigh, consisting of four muscles. It is essential for knee extension and hip flexion.",
         "fun_fact": "The quadriceps are one of the strongest muscle groups in the body, crucial for walking, running, and jumping.",
         "image": "quadriceps.png",
+        "actions": [
+            {
+                "name": "Knee Extension",
+                "description": "Straightening the knee joint, moving the lower leg forward. This is the primary movement of the quadriceps and is essential for standing up and walking.",
+                "gif": "knee_extension.gif"
+            },
+            {
+                "name": "Hip Flexion",
+                "description": "Lifting the thigh toward the abdomen. The rectus femoris, one of the quadriceps muscles, assists in this movement.",
+                "gif": "hip_flexion.gif"
+            },
+            {
+                "name": "Leg Stabilization",
+                "description": "Maintaining stability of the knee joint during weight-bearing activities. The quadriceps play a crucial role in preventing knee injuries.",
+                "gif": "leg_stabilization.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Barbell Squat",
+                "description": "A fundamental compound exercise that primarily targets the quadriceps while also engaging the glutes and hamstrings. Essential for building leg strength and size.",
+                "gif": "barbell_squat.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Leg Press",
+                "description": "A compound exercise that allows for heavy loading of the quadriceps with less technical demand than squats. Great for building quadriceps mass.",
+                "gif": "leg_press.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Leg Extension",
+                "description": "An isolation exercise that specifically targets the quadriceps. Excellent for developing the teardrop shape of the vastus medialis.",
+                "gif": "leg_extension.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Squats for Quads",
@@ -154,6 +302,43 @@ muscles = {
         "description": "The calves include two main muscles: the gastrocnemius and the soleus. Together, they facilitate ankle plantar flexion and play a key role in walking, running, and jumping.",
         "fun_fact": "The soleus lies underneath the gastrocnemius and is especially important for endurance activities like long-distance running.",
         "image": "calves.png",
+        "actions": [
+            {
+                "name": "Plantar Flexion",
+                "description": "Pointing the foot downward, as in standing on tiptoes. This is the primary movement of both the gastrocnemius and soleus muscles.",
+                "gif": "plantar_flexion.gif"
+            },
+            {
+                "name": "Knee Stabilization",
+                "description": "The gastrocnemius crosses the knee joint and helps stabilize it during movement, especially during running and jumping.",
+                "gif": "knee_stabilization.gif"
+            },
+            {
+                "name": "Ankle Stabilization",
+                "description": "Both muscles work together to maintain ankle stability during weight-bearing activities and dynamic movements.",
+                "gif": "ankle_stabilization.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Standing Calf Raise",
+                "description": "A compound exercise that primarily targets the gastrocnemius. Can be performed with bodyweight, dumbbells, or on a calf raise machine.",
+                "gif": "standing_calf_raise.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Seated Calf Raise",
+                "description": "An isolation exercise that primarily targets the soleus muscle. Great for developing the lower portion of the calf.",
+                "gif": "seated_calf_raise.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Jump Rope",
+                "description": "A dynamic exercise that engages both calf muscles while improving cardiovascular fitness and coordination.",
+                "gif": "jump_rope.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "How to Train Your Calves",
@@ -245,6 +430,43 @@ muscles = {
         "description": "The latissimus dorsi is a large, flat muscle on the back that extends from the lower spine to the upper arm. It's responsible for arm adduction, extension, and internal rotation.",
         "fun_fact": "The latissimus dorsi is the largest muscle in the upper body and is often called the 'lats'.",
         "image": "latissimus.png",
+        "actions": [
+            {
+                "name": "Arm Adduction",
+                "description": "Moving the arm down toward the body from an elevated position. This is the primary movement of the latissimus dorsi, as seen in pull-ups and lat pulldowns.",
+                "gif": "arm_adduction.gif"
+            },
+            {
+                "name": "Arm Extension",
+                "description": "Moving the arm backward from the front of the body. The lats work with the posterior deltoids in this movement.",
+                "gif": "arm_extension.gif"
+            },
+            {
+                "name": "Internal Rotation",
+                "description": "Rotating the arm inward toward the body. This movement is important for pulling exercises and shoulder stability.",
+                "gif": "internal_rotation.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Pull-Up",
+                "description": "A fundamental compound exercise that primarily targets the latissimus dorsi. Great for building back width and overall upper body strength.",
+                "gif": "pull_up.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Lat Pulldown",
+                "description": "A compound exercise that targets the lats while allowing for easier progression than pull-ups. Excellent for developing back width.",
+                "gif": "lat_pulldown.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Bent-Over Row",
+                "description": "A compound exercise that targets the lats while also engaging the middle back and rear deltoids. Great for overall back thickness.",
+                "gif": "bent_over_row.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Lat Training Essentials",
@@ -293,6 +515,43 @@ muscles = {
         "description": "The hamstrings are a group of three muscles on the back of the thigh: biceps femoris, semitendinosus, and semimembranosus. They're responsible for knee flexion and hip extension.",
         "fun_fact": "The hamstrings are named after the way butchers would hang pigs by these tendons, or 'ham strings'.",
         "image": "hamstrings.png",
+        "actions": [
+            {
+                "name": "Knee Flexion",
+                "description": "Bending the knee, bringing the heel toward the buttocks. This is the primary movement of the hamstrings and is essential for walking and running.",
+                "gif": "knee_flexion.gif"
+            },
+            {
+                "name": "Hip Extension",
+                "description": "Moving the thigh backward, as in the upward phase of a deadlift. The hamstrings work with the glutes in this movement.",
+                "gif": "hip_extension.gif"
+            },
+            {
+                "name": "External Rotation",
+                "description": "The biceps femoris, one of the hamstring muscles, assists in rotating the lower leg outward. This movement is important for dynamic activities and knee stability.",
+                "gif": "external_rotation.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Romanian Deadlift",
+                "description": "A compound exercise that primarily targets the hamstrings while also engaging the glutes and lower back. Great for building hamstring strength and flexibility.",
+                "gif": "romanian_deadlift.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Leg Curl",
+                "description": "An isolation exercise that specifically targets the hamstrings. Can be performed lying down, standing, or seated on a machine.",
+                "gif": "leg_curl.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Glute-Ham Raise",
+                "description": "A compound exercise that targets both the hamstrings and glutes. Excellent for developing posterior chain strength and control.",
+                "gif": "glute_ham_raise.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Hamstring Training",
