@@ -1,16 +1,34 @@
 // Questions
 const questions = [
-    {question:"Which muscle helps flex the elbow?",options:["Biceps brachii","Triceps brachii","Deltoid","Latissimus dorsi"],correct:0,category:"upper"},
-    {question:"Which isolation movement trains the chest?",options:["Chest fly","Push-up","Dumbbell bench press","Barbell bench press"],correct:0,category:"upper"},
-    {question:"Which exercise primarily targets the calves?",options:["Standing calf raise","Leg curl","Plank","Barbell row"],correct:0,category:"lower"},
-    {question:"Which movement best develops the trapezius?",options:["Barbell shrug","Preacher curl","Leg extension","Lat pulldown"],correct:0,category:"upper"},
-    {question:"The pectoralis major is activated during?",options:["Bench press","Deadlift","Barbell row","Hip thrust"],correct:0,category:"upper"},
-    {question:"Primary hamstring movement?",options:["Knee flexion","Hip abduction","Shoulder adduction","Elbow extension"],correct:0,category:"lower"},
-    {question:"Which exercise targets the biceps?",options:["Barbell curl","Push-up","Deadlift","Leg extension"],correct:0,category:"upper"},
-    {question:"Compound leg exercise?",options:["Barbell squat","Seated calf raise","Leg curl","Hip abduction machine"],correct:0,category:"lower"},
-    {question:"Best core stabilization move?",options:["Plank","Leg press","Lateral raise","Leg curl"],correct:0,category:"upper"},
-    {question:"Bodyweight for triceps?",options:["Close-grip push-up","Pull-up","Bodyweight squat","Jumping jacks"],correct:0,category:"upper"}
-  ];
+  {question: "What is the primary function of the pectoralis major?", options: ["Hip flexion", "Shoulder adduction", "Knee extension"], correct: 1, category: "upper"},
+  {question: "Which exercise best isolates the chest?", options: ["Push-Up", "Chest Fly", "Barbell Curl"], correct: 1, category: "upper"},
+  {question: "Which movement engages the upper part of the chest?", options: ["Shoulder Flexion", "Scapular Retraction", "Hip Extension"], correct: 0, category: "upper"},
+  {question: "Which part of the deltoid is primarily targeted by lateral raises?", options: ["Anterior", "Posterior", "Lateral"], correct: 2, category: "upper"},
+  {question: "What is the shape origin of the deltoid muscle's name?", options: ["Circle", "Delta (Triangle)", "Square"], correct: 1, category: "upper"},
+  {question: "What is the primary function of the biceps brachii?", options: ["Elbow extension", "Elbow flexion", "Shoulder abduction"], correct: 1, category: "upper"},
+  {question: "How many heads does the biceps brachii have?", options: ["One", "Two", "Three"], correct: 1, category: "upper"},
+  {question: "Which exercise primarily targets the lower abdominals?", options: ["Crunches", "Leg Raises", "Planks"], correct: 1, category: "upper"},
+  {question: "What gives the 'six-pack' look in the abs?", options: ["Fat Layers", "Tendinous Intersections", "Rectus Sheath"], correct: 1, category: "upper"},
+  {question: "Which of the following is NOT part of the quadriceps group?", options: ["Rectus Femoris", "Biceps Femoris", "Vastus Medialis"], correct: 1, category: "lower"},
+  {question: "Which motion are the quadriceps primarily responsible for?", options: ["Hip Abduction", "Knee Extension", "Ankle Dorsiflexion"], correct: 1, category: "lower"},
+  {question: "Which calf muscle is more active during seated calf raises?", options: ["Gastrocnemius", "Soleus", "Tibialis Anterior"], correct: 1, category: "lower"},
+  {question: "What is the main action of the calf muscles?", options: ["Knee Extension", "Ankle Plantar Flexion", "Hip Extension"], correct: 1, category: "lower"},
+  {question: "How many heads does the triceps brachii have?", options: ["Two", "Three", "Four"], correct: 1, category: "upper"},
+  {question: "What is the primary function of the triceps?", options: ["Elbow Extension", "Wrist Flexion", "Shoulder Abduction"], correct: 0, category: "upper"},
+  {question: "What movement is performed when the scapula is pulled toward the spine?", options: ["Scapular Elevation", "Scapular Depression", "Scapular Retraction"], correct: 2, category: "upper"},
+  {question: "Which exercise targets the upper trapezius?", options: ["Barbell Shrug", "Leg Curl", "Chest Press"], correct: 0, category: "upper"},
+  {question: "What is the primary function of the latissimus dorsi?", options: ["Arm abduction", "Arm adduction", "Shoulder flexion"], correct: 1, category: "upper"},
+  {question: "What is a common nickname for the latissimus dorsi?", options: ["Lats", "Traps", "Delts"], correct: 0, category: "upper"},
+  {question: "Which exercise primarily targets the gluteus maximus?", options: ["Hip Thrusts", "Leg Extensions", "Calf Raises"], correct: 0, category: "lower"},
+  {question: "What is the gluteus maximus mainly responsible for?", options: ["Knee Flexion", "Hip Extension", "Ankle Plantar Flexion"], correct: 1, category: "lower"},
+  {question: "How many muscles make up the hamstring group?", options: ["Two", "Three", "Four"], correct: 1, category: "lower"},
+  {question: "Where are the hamstrings located?", options: ["Back of the thigh", "Front of the thigh", "Lower leg"], correct: 0, category: "lower"},
+  {question: "Which exercise isolates the biceps the most?", options: ["Bicep Curl", "Push-Up", "Tricep Dip"], correct: 0, category: "upper"},
+  {question: "What muscle is known as the 'six-pack'?", options: ["Rectus Abdominis", "Obliques", "Transverse Abdominis"], correct: 0, category: "upper"},
+  {question: "Which exercise is best for building quad strength?", options: ["Barbell Squat", "Hamstring Curl", "Calf Raise"], correct: 0, category: "lower"},
+  {question: "Which muscle lies beneath the gastrocnemius?", options: ["Soleus", "Rectus Femoris", "Vastus Lateralis"], correct: 0, category: "lower"},
+  {question: "Which exercise works the triceps using cables?", options: ["Pushdown", "Pull-Up", "Lateral Raise"], correct: 0, category: "upper"}
+];
   
   // State
   let currentQuestion=0, score=0, streak=0, timeLeft=60, timer, startTime, responseTimes=[], selectedCategory='all';
