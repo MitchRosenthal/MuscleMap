@@ -491,6 +491,43 @@ muscles = {
         "description": "The gluteus maximus is the largest and most superficial of the three gluteal muscles. It's responsible for hip extension, external rotation, and maintaining an upright posture.",
         "fun_fact": "The gluteus maximus is the largest muscle in the human body and is crucial for bipedal locomotion.",
         "image": "glutes.png",
+        "actions": [
+            {
+                "name": "Hip Extension",
+                "description": "Moving the thigh backward from the front of the body. This is the primary movement of the gluteus maximus and is essential for walking, running, and standing up.",
+                "gif": "hip_extension.gif"
+            },
+            {
+                "name": "External Rotation",
+                "description": "Rotating the thigh outward. The gluteus maximus works with other hip muscles to maintain hip stability during movement.",
+                "gif": "external_rotation.gif"
+            },
+            {
+                "name": "Hip Abduction",
+                "description": "Moving the thigh away from the midline of the body. The gluteus maximus assists in this movement along with the gluteus medius and minimus.",
+                "gif": "hip_abduction.gif"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "Compound",
+                "name": "Hip Thrust",
+                "description": "A compound exercise that directly targets the gluteus maximus. Excellent for building glute strength and size while being easier on the lower back than squats.",
+                "gif": "hip_thrust.gif"
+            },
+            {
+                "type": "Compound",
+                "name": "Romanian Deadlift",
+                "description": "A compound exercise that targets the glutes while also engaging the hamstrings and lower back. Great for developing posterior chain strength.",
+                "gif": "romanian_deadlift.gif"
+            },
+            {
+                "type": "Isolation",
+                "name": "Glute Kickback",
+                "description": "An isolation exercise that specifically targets the gluteus maximus. Can be performed with bodyweight or resistance bands.",
+                "gif": "glute_kickback.gif"
+            }
+        ],
         "videos": [
             {
                 "title": "Glute Training Guide",
@@ -529,7 +566,7 @@ muscles = {
             {
                 "name": "External Rotation",
                 "description": "The biceps femoris, one of the hamstring muscles, assists in rotating the lower leg outward. This movement is important for dynamic activities and knee stability.",
-                "gif": "external_rotation.gif"
+                "gif": "Hamstrings-animation.gif"
             }
         ],
         "exercises": [
