@@ -363,23 +363,48 @@ muscles = {
         "description": "The triceps brachii is a large muscle on the back of the upper arm, consisting of three heads. It is responsible for extending the elbow and plays a crucial role in pushing movements.",
         "fun_fact": "The triceps makes up about 60% of the upper arm's muscle mass, making it larger than the biceps.",
         "image": "triceps.png",
-        "videos": [
-            {
-                "title": "Triceps Training Guide",
-                "url": "https://www.youtube.com/embed/nRiJVZDpdL0",
-                "description": "Learn effective triceps exercises including pushdowns, extensions, and dips."
-            }
-        ],
-        "subgroups": ["Long Head", "Lateral Head", "Medial Head"],
-        "quiz": {
-            "questions": [
-                {
-                    "question": "How many heads does the triceps brachii have?",
-                    "choices": ["Two", "Three", "Four"],
-                    "answer": "Three"
-                }
-            ]
-        }
+        "actions": [
+  {
+    "name": "Elbow Extension",
+    "description": "Straightening the arm at the elbow joint. This is the primary movement of the triceps brachii, used in pressing and pushing actions.",
+    "gif": "elbow_extension.gif"
+  },
+  {
+    "name": "Shoulder Flexion",
+    "description": "Raising the arm in front of the body. In some tricep exercises, this motion contributes to activating the long head of the triceps.",
+    "gif": "shoulder_flexion.gif"
+  }
+],
+"exercises": [
+  {
+    "type": "Isolation",
+    "name": "Tricep Overhead Press",
+    "description": "Targets the long head of the triceps by extending the elbows while holding weight overhead. Can be performed with dumbbells or a barbell.",
+    "gif": "overhead.gif"
+  },
+  {
+    "type": "Bodyweight",
+    "name": "Tricep Dip",
+    "description": "A bodyweight movement that involves lowering and raising the body using the triceps. Commonly done on parallel bars or a bench.",
+    "gif": "dips.gif"
+  },
+  {
+    "type": "Isolation",
+    "name": "Tricep Kickback",
+    "description": "An isolation exercise that targets the triceps by extending the elbow while hinged at the hip, typically using dumbbells.",
+    "gif": "kickbacks.gif"
+  }
+],
+"subgroups": ["Long Head", "Lateral Head", "Medial Head"],
+"quiz": {
+  "questions": [
+    {
+      "question": "What is the primary function of the triceps brachii?",
+      "choices": ["Elbow extension", "Wrist flexion", "Shoulder abduction"],
+      "answer": "Elbow extension"
+    }
+  ]
+}
     },
 
     "trapezius": {
