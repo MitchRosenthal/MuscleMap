@@ -835,7 +835,7 @@ body {
 /* ====================================== */
 .muscle-info {
   background-color: var(--fitness-light);
-  border-left: 5px solid var(--fitness-accent);
+  border: 2px solid var(--fitness-accent);
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   border-radius: 12px;
   color: var(--fitness-dark);
