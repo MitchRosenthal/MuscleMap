@@ -29,10 +29,18 @@
       <img src="{{ url_for('static', filename='images/' + muscle.image) }}"
       alt="{{ muscle.name }}" class="img-fluid mb-4" />
       <p class="lead">{{ muscle.description }}</p>
-      <div class="fun-fact-box mt-4 p-3 rounded">
-        <strong class="text-accent">Subgroups:</strong>
-        <p class="mb-0">{{ muscle.subgroups|join(', ') }}</p>
-      </div>
+        <!-- Fun Fact Section -->
+        <div class="fun-fact-box mt-4 p-3 rounded">
+          <strong class="text-accent">💡 Fun Fact:</strong>
+          <p class="mb-0">{{ muscle.fun_fact }}</p>
+        </div>
+
+        <!-- Subgroups Section -->
+        <div class="fun-fact-box mt-3 p-3 rounded">
+          <strong class="text-accent">Subgroups:</strong>
+          <p class="mb-0">{{ muscle.subgroups|join(', ') }}</p>
+        </div>
+
       <div class="scroll-cue mt-4 text-center">
         <button class="btn btn-accent" onclick="scrollToCarousel()">
           View Key Muscle Actions ↓
