@@ -111,9 +111,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const muscleMapImage = document.getElementById('muscleMapImage');
     const muscleLinksFront = document.getElementById('muscle-links');
     const muscleLinksBack = document.getElementById('muscle-links-back');
-    let showingFront = true;
+    let showingFront = localStorage.getItem('showingFront') !== 'false';
 
     if (toggleBtn && muscleMapImage && muscleLinksFront && muscleLinksBack) {
+        // Set initial state
+        if (!showingFront) {
+            muscleMapImage.setAttribute('href', muscleMapImage.getAttribute('data-back-image'));
+            toggleBtn.textContent = 'Show Front View';
+            muscleLinksFront.style.display = 'none';
+            muscleLinksBack.style.display = 'block';
+        }
+
         toggleBtn.addEventListener('click', function() {
             if (showingFront) {
                 muscleMapImage.setAttribute('href', muscleMapImage.getAttribute('data-back-image'));
@@ -128,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 muscleLinksFront.style.display = 'block';
                 muscleLinksBack.style.display = 'none';
             }
+            localStorage.setItem('showingFront', showingFront);
         });
     }
 /**
