@@ -14,10 +14,6 @@
         <span class="check-mark">✓</span>
         How to Train
       </li>
-      <li class="locked" data-page="3">
-        <span class="check-mark">✓</span>
-        Subgroups
-      </li>
       <li class="locked" data-page="4">
         <span class="check-mark">✓</span>
         Quiz
@@ -34,8 +30,8 @@
       alt="{{ muscle.name }}" class="img-fluid mb-4" />
       <p class="lead">{{ muscle.description }}</p>
       <div class="fun-fact-box mt-4 p-3 rounded">
-        <strong class="text-accent">💡 Fun Fact:</strong>
-        <p class="mb-0">{{ muscle.fun_fact }}</p>
+        <strong class="text-accent">Subgroups:</strong>
+        <p class="mb-0">{{ muscle.subgroups|join(', ') }}</p>
       </div>
       <div class="scroll-cue mt-4 text-center">
         <button class="btn btn-accent" onclick="scrollToCarousel()">

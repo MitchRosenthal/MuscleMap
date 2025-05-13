@@ -14,10 +14,6 @@
         <span class="check-mark">✓</span>
         How to Train
       </li>
-      <li class="locked" data-page="3" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=3) }}">
-        <span class="check-mark">✓</span>
-        Subgroups
-      </li>
       <li class="locked" data-page="4" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}">
         <span class="check-mark">✓</span>
         Quiz
@@ -76,7 +72,7 @@
     </div>
     
     <div class="mt-2">
-      {% if muscle.subgroups %}
+    
       <div class="navigation-buttons d-flex justify-content-center gap-2 mt-2 flex-wrap">
         <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=1) }}"
            class="btn btn-outline-accent">
@@ -84,18 +80,12 @@
         </a>
       
         <a id="exerciseNextButton"
-           href="{{ url_for('muscle_page', muscle_name=muscle_name, page=3) }}"
+           href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}"
            class="btn btn-accent disabled"
            tabindex="-1" aria-disabled="true">
-           Next: Muscle Subgroups →
+           Take the Quiz →
         </a>
       </div>
-      
-      {% else %}
-        <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}" class="btn btn-primary">
-          Take the Quiz →
-        </a>
-      {% endif %}
     </div>
 
     <p id="exerciseInstruction" class="text-center text-muted mb-2">

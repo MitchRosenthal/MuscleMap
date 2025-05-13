@@ -14,10 +14,6 @@
         <span class="check-mark">✓</span>
         How to Train
       </li>
-      <li class="completed" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=3) }}">
-        <span class="check-mark">✓</span>
-        Subgroups
-      </li>
       <li class="current" data-href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}">
         <span class="check-mark">✓</span>
         Quiz
@@ -73,8 +69,8 @@
     {% endif %}
 
     <div class="navigation-buttons d-flex justify-content-center gap-3 mt-5 flex-wrap">
-      <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=3) }}" class="btn btn-outline-accent btn-lg">
-        <i class="fas fa-arrow-left me-2"></i>Back to Subgroups
+      <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=2) }}" class="btn btn-outline-accent btn-lg">
+        <i class="fas fa-arrow-left me-2"></i>Back to How to Train
       </a>
       <a href="{{ url_for('muscle_map') }}" class="btn btn-accent btn-lg">
         <i class="fas fa-map me-2"></i>Back to Muscle Map
