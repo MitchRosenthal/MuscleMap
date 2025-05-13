@@ -8,12 +8,13 @@
 
   <h1>Interactive Muscle Map</h1>
 
-  <div class="mt-4 text-center">
+  <div class="mt-2 text-center">
+    <p class="text-muted mb-2">Hover over any muscle group to highlight it, and click to learn more!</p>
     <a href="{{ url_for('quiz') }}" id="quiz-button" class="btn btn-cta" style="display: none;">Think you know it all? Take the quiz!</a>
   </div>
 
   <!-- Toggle Front/Back Button -->
-  <div class="text-center mb-4">
+  <div class="text-center mb-2">
     <button id="toggleViewBtn" class="btn btn-secondary">Show Back View</button>
   </div>
 
@@ -24,11 +25,11 @@
     </button>
   </div>-->
 
-  <div class="muscle-map-container">
+  <div class="muscle-map-container" style="margin-top: 0.5rem;">
     <!-- Anterior Muscle Groups List -->
     <div class="muscle-groups-list anterior">
-      <h3>Anterior (Front) Muscles</h3>
-      <ul>
+      <h3 class="mb-1">Anterior (Front) Muscles</h3>
+      <ul class="mb-0">
         <li id="chest-group"><span class="check-mark">✓</span> Chest (Pectoralis)</li>
         <li id="shoulders-group"><span class="check-mark">✓</span> Shoulders (Deltoids)</li>
         <li id="biceps-group"><span class="check-mark">✓</span> Biceps</li>
@@ -37,7 +38,7 @@
       </ul>
     </div>
 
-    <div class="svg-map-container">
+    <div class="svg-map-container" style="transform: scale(0.9); transform-origin: top center;">
       <svg id="muscleSVG" viewBox="0 0 599 847" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
         <!-- Background muscle anatomy image -->
         <image id="muscleMapImage" 
@@ -115,8 +116,8 @@
 
     <!-- Posterior Muscle Groups List -->
     <div class="muscle-groups-list posterior">
-      <h3>Posterior (Back) Muscles</h3>
-      <ul>
+      <h3 class="mb-1">Posterior (Back) Muscles</h3>
+      <ul class="mb-0">
         <li id="triceps-group"><span class="check-mark">✓</span> Triceps</li>
         <li id="trapezius-group"><span class="check-mark">✓</span> Trapezius</li>
         <li id="latissimus-group"><span class="check-mark">✓</span> Latissimus Dorsi</li>
@@ -125,10 +126,6 @@
         <li id="calves-group"><span class="check-mark">✓</span> Calves</li>
       </ul>
     </div>
-  </div>
-
-  <div class="mt-4 text-center">
-    <p class="text-muted">Hover over any muscle group to highlight it, and click to learn more!</p>
   </div>
 </div>
 

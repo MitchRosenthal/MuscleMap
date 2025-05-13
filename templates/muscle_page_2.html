@@ -24,35 +24,35 @@
       </li>
     </ul>
   </div>
-
+  
   <!-- Main Content -->
   <div class="main-content">
-    <h1>Training the {{ muscle.name }}</h1>
+    <h1 class="mb-2">Training the {{ muscle.name }}</h1>
 
-    <h3 class="text-center text-accent mt-5 mb-3">{{ muscle.name.split()[0] }} Exercises</h3>
+    <h3 class="text-center text-accent mt-3 mb-2">{{ muscle.name.split()[0] }} Exercises</h3>
 
     <div id="exerciseCarousel" class="carousel slide" data-bs-ride="false">
     
       <div class="carousel-inner">
         {% for exercise in muscle.exercises %}
         <div class="carousel-item {% if loop.first %}active{% endif %}">
-          <div class="card text-center p-3">
+          <div class="card text-center p-2">
             <img src="{{ url_for('static', filename='gifs/exercises/' + muscle_name + '/' + exercise.gif) }}"
                  class="card-img-top mx-auto d-block"
                  alt="{{ exercise.name }}"
-                 style="max-height: 300px; object-fit: contain;" />
-            <div class="card-body">
-              <h5 class="card-title text-accent">{{ exercise.name }}</h5>
-              <p class="card-subtitle mb-2 text-muted">{{ exercise.type }} Exercise</p>
-              <p class="card-text">{{ exercise.description }}</p>
+                 style="max-height: 250px; object-fit: contain;" />
+            <div class="card-body py-2">
+              <h5 class="card-title text-accent mb-1">{{ exercise.name }}</h5>
+              <p class="card-subtitle mb-1 text-muted">{{ exercise.type }} Exercise</p>
+              <p class="card-text mb-0">{{ exercise.description }}</p>
             </div>
           </div>
         </div>
         {% endfor %}
       </div>
     
-      <!-- 🎯 Now place the indicators here -->
-      <div class="carousel-indicators mb-3 mt-2">
+      <!-- Carousel indicators -->
+      <div class="carousel-indicators mb-2 mt-1">
         {% for exercise in muscle.exercises %}
           <button type="button"
                   data-bs-target="#exerciseCarousel"
@@ -75,10 +75,9 @@
       </button>
     </div>
     
-
-    <div class="mt-4">
+    <div class="mt-2">
       {% if muscle.subgroups %}
-      <div class="navigation-buttons d-flex justify-content-center gap-3 mt-4 flex-wrap">
+      <div class="navigation-buttons d-flex justify-content-center gap-2 mt-2 flex-wrap">
         <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=1) }}"
            class="btn btn-outline-accent">
            ← Back to Overview
@@ -92,20 +91,16 @@
         </a>
       </div>
       
-   
       {% else %}
         <a href="{{ url_for('muscle_page', muscle_name=muscle_name, page=4) }}" class="btn btn-primary">
           Take the Quiz →
         </a>
       {% endif %}
-
     </div>
-      <p id="exerciseInstruction" class="text-center text-muted mb-3">
-        🔒 View all exercises to unlock the next step.
-      </p>
 
-
-
+    <p id="exerciseInstruction" class="text-center text-muted mb-2">
+      🔒 View all exercises to unlock the next step.
+    </p>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
