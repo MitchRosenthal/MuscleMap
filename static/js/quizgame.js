@@ -31,8 +31,7 @@ const questions = [
 ];
   
   // State
-
-  let currentQuestion=0, score=0, streak=0, timeLeft=60, timer, startTime, responseTimes=[], selectedCategory='all', gameOver=false;
+  let currentQuestion=0, score=0, streak=0, timeLeft=60, timer, startTime, responseTimes=[], selectedCategory='all';
   
   // Shuffle util
   function shuffleArray(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }}
@@ -45,9 +44,7 @@ const questions = [
     streak=0; 
     timeLeft=60; 
     responseTimes=[]; 
-    gameOver = false;
-
-    document.getElementById('questionContainer').style.display = 'block';
+    document.getElementById('questionContainer').classList.add('active');
     document.getElementById('startGame').style.display='none'; 
     document.getElementById('tryAgain').style.display='none'; 
     document.getElementById('resultsContainer').style.display='none'; 
@@ -82,8 +79,6 @@ const questions = [
   
   // Check answer
   function checkAnswer(btn){  
-    if (gameOver) return;
-  
     const opts=document.querySelectorAll('.answer-option'); 
     opts.forEach(b=>b.disabled=true); 
     const isCorrect=btn.dataset.correct==='true'; 
@@ -91,28 +86,19 @@ const questions = [
     responseTimes.push(rt); 
   
     if(isCorrect){ 
-      btn.classList.add('correct-flash'); 
-      score+=10 + (rt<3?5:0); 
+      btn.classList.add('correct-flash'); score+=10 + (rt<3?5:0); 
       streak++; 
       if(streak>1) showCombo(); 
-    } else { 
-      btn.classList.add('shake'); 
-      const correctBtn=document.querySelector('.answer-option[data-correct="true"]'); 
+    } 
+    else { 
+      btn.classList.add('shake'); const correctBtn=document.querySelector('.answer-option[data-correct="true"]'); 
       correctBtn.classList.add('correct-flash'); 
       score=Math.max(0,score-5); 
       streak=0; 
     } 
-  
     updateDisplay(); 
-  
-    setTimeout(() => { 
-      if (!gameOver) {
-        currentQuestion++; 
-        showQuestion(); 
-      }
-    }, 800); 
+    setTimeout(() => { currentQuestion++; showQuestion(); }, 800); 
   }
-  
   
   // Update display
   function updateDisplay(){ 
@@ -131,21 +117,13 @@ const questions = [
   // End game
   function endGame(){ 
     clearInterval(timer); 
-    gameOver = true;
-  
-    // Hide the question UI
-    document.getElementById('questionContainer').style.display = 'none';
-  
-    // Show results
-    document.getElementById('finalScore').textContent = score; 
-    document.getElementById('correctAnswers').textContent = responseTimes.filter(t => t < 3).length; 
-    document.getElementById('avgResponseTime').textContent = ((responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length) || 0).toFixed(2); 
-    document.getElementById('bestStreak').textContent = streak; 
-    document.getElementById('resultsContainer').style.display = 'block'; 
-    document.getElementById('tryAgain').style.display = 'inline-block'; 
+    document.getElementById('finalScore').textContent=score; 
+    document.getElementById('correctAnswers').textContent=responseTimes.filter(t=>t<3).length; 
+    document.getElementById('avgResponseTime').textContent=((responseTimes.reduce((a,b)=>a+b,0)/responseTimes.length)||0).toFixed(2); 
+    document.getElementById('bestStreak').textContent=streak; document.getElementById('resultsContainer').style.display='block'; 
+    document.getElementById('tryAgain').style.display='inline-block'; 
     updateLeaderboard(); 
   }
-  
   
   // Leaderboard
   function updateLeaderboard(){ 

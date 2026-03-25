@@ -1,7 +1,7 @@
 from flask import Flask, render_template, abort
 from muscle_data import muscles
 from quiz_questions import dropdown_questions
-import uuid  # Add this import
+import uuid
 
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ def muscle_page(muscle_name, page):
     # Render the correct template based on the step/page
     try:
         return render_template(f'muscle_page_{page}.html', muscle=muscle, muscle_name=muscle_name)
-    except:
+    except Exception:
         abort(404)
 
 @app.route('/quiz')
