@@ -36,7 +36,7 @@ No database, API key, or account is needed. Some styling resources are loaded fr
 `server.py` defines Flask routes and renders Jinja templates. `muscle_data.py` and `quiz_questions.py` contain Python data structures; they are not a database service. JavaScript handles map interactions, quiz behavior, and browser-local progress.
 
 - `templates/`: home, muscle map, lesson pages, quizzes, and about page.
-- `static/script.js`: map interactions and browser progress.
+- `static/js/script.js`: map interactions and browser progress.
 - `static/js/`: lesson and quiz interactions.
 - `static/images/` and `static/gifs/`: anatomy and movement assets.
 
@@ -50,4 +50,4 @@ No public deployment is currently documented. The development server above is fo
 
 ## Checks
 
-Run `python -m unittest discover -s tests` to check public pages, linked muscle lessons, the legacy quiz redirect, and unknown-muscle handling.
+Run `python -m unittest discover -s tests` to check public pages, linked muscle lessons, the standalone quiz, and unknown-muscle handling.

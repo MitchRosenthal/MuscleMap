@@ -27,7 +27,7 @@ dropdown_questions = [
     },
     {
         "number": 6,
-        "image": "gastrocnemius.png",
+        "image": "calves.png",
         "alt": "Calf muscle diagram",
         "question": "Which muscle is strengthened by calf raises?",
         "options": [
@@ -66,7 +66,7 @@ dropdown_questions = [
     },
     {
         "number": 9,
-        "image": "deltoid.png",
+        "image": "shoulders.png",
         "alt": "Deltoid muscle diagram",
         "question": "Lateral raises mainly target which muscle?",
         "options": [
@@ -79,7 +79,7 @@ dropdown_questions = [
     },
     {
         "number": 10,
-        "image": "quads.png",
+        "image": "quadriceps.png",
         "alt": "Quadriceps muscle diagram",
         "question": "Lunges strengthen which of the following?",
         "options": [
@@ -131,7 +131,7 @@ dropdown_questions = [
     },
     {
         "number": 14,
-        "image": "erector-spinae.png",
+        "image": None,
         "alt": "Lower back muscles diagram",
         "question": "Which movement strengthens the lower back?",
         "options": [

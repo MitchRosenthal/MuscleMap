@@ -1,7 +1,7 @@
-from flask import Flask, render_template, abort, redirect, url_for
+from flask import Flask, render_template, abort
 from muscle_data import muscles
 from quiz_questions import dropdown_questions
-import uuid  # Add this import
+import uuid
 
 app = Flask(__name__)
 
@@ -25,13 +25,22 @@ def muscle_page(muscle_name, page):
     # Render the correct template based on the step/page
     try:
         return render_template(f'muscle_page_{page}.html', muscle=muscle, muscle_name=muscle_name)
-    except:
+    except Exception:
         abort(404)
 
 @app.route('/quiz')
 def quiz():
-    # The original standalone quiz was replaced by the training game.
-    return redirect(url_for('quizgame'))
+    static_answers = {
+        1: {"muscle": "biceps", "exercise": "bicep curls"},
+        2: {"muscle": "pectorals", "exercise": "bench press"},
+        3: {"muscle": "deltoid", "exercise": "lateral raises"},
+    }
+
+    # Populate answers for Q4-Q15 dynamically
+    for i, q in enumerate(dropdown_questions, start=4):
+        static_answers[i] = {"muscle": q["answer"], "exercise": q["question"]}
+
+    return render_template("quiz.html", dropdown_questions=dropdown_questions, question_answers=static_answers)
 
 
 @app.route('/quizgame')
