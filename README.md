@@ -1,94 +1,53 @@
-# MuscleMap - Interactive Muscle Anatomy Learning Platform
+# MuscleMap
 
-MuscleMap is an interactive web application that helps users learn about muscle anatomy through an engaging visual interface and quiz system. The application features an interactive muscle map, detailed muscle information pages, and a quiz game to test knowledge.
+An interactive anatomy learning app built by Nick Felix, Mitchell Rosenthal, Jonathan Wrenn, and Shaya Schwarz. The interface also uses the name **Mind & Muscle**.
+
+Explore the front and back of a muscle map, open guided muscle lessons, and practice with quizzes and a timed training game.
 
 ## Features
 
-- Interactive muscle map with front and back views
-- Detailed muscle information pages with:
-  - Muscle descriptions and fun facts
-  - Subgroup information
-  - Action demonstrations
-  - Training guidance
-- Quiz game to test muscle knowledge
-- Progress tracking system
-- Mobile-responsive design
+- Clickable muscle regions with front/back views.
+- Muscle descriptions, movement demonstrations, and exercise information.
+- Quiz questions and an interactive training game.
+- Browser-based learning progress and a local game leaderboard.
+- Responsive Flask templates styled with Bootstrap and custom CSS.
 
-## Prerequisites
+## Mitchell's contributions
 
-- Python 3.7 or higher
-- pip (Python package installer)
-- Modern web browser (Chrome, Firefox, Safari, or Edge)
+The original commit history records Mitchell's work on clickable muscle regions, SVG outlines, the posterior map, front/back toggling, progress tracking, Flask routes, muscle content, and project documentation. This is a four-person team project; the retained history credits each contributor.
 
-## Installation
+## Run locally
 
-1. Clone the repository:
+Requires Python 3.10 or newer for this documented setup.
+
 ```bash
-git clone [repository-url]
-cd MuscleMap
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m flask --app server run --port 5001
 ```
 
-2. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-```
+On Windows, activate with `.venv\Scripts\activate` instead. Open http://127.0.0.1:5001. Stop with Ctrl+C.
 
-3. Install required packages:
-```bash
-pip install flask
-```
+No database, API key, or account is needed. Some styling resources are loaded from external CDNs, so full styling requires internet access.
 
-## Running the Application
+## How it works
 
-1. Start the Flask server:
-```bash
-python server.py
-```
+`server.py` defines Flask routes and renders Jinja templates. `muscle_data.py` and `quiz_questions.py` contain Python data structures; they are not a database service. JavaScript handles map interactions, quiz behavior, and browser-local progress.
 
-2. Open your web browser and navigate to:
-```
-http://localhost:5000
-```
+- `templates/`: home, muscle map, lesson pages, quizzes, and about page.
+- `static/script.js`: map interactions and browser progress.
+- `static/js/`: lesson and quiz interactions.
+- `static/images/` and `static/gifs/`: anatomy and movement assets.
 
-## Project Structure
+Progress is local to a browser and map progress resets when the server's session identifier changes. Quiz answers are delivered to the browser; this is a learning tool, not a secure examination system.
 
-```
-MuscleMap/
-├── static/
-│   ├── images/         # Muscle images and maps
-│   ├── gifs/          # Action demonstration GIFs
-│   ├── main.css       # Main stylesheet
-│   ├── script.js      # Main JavaScript file
-│   └── progress-tracker.js
-├── templates/         # HTML templates
-├── muscle_data.py    # Muscle information database
-├── quiz_questions.py # Quiz content
-└── server.py         # Flask application server
-```
+## Provenance and access
 
-## Development
+Originally developed in the private team repository `nicorox247/MuscleMap`. This copy preserves the original Git history. Public publication and deployment should be coordinated with the original team and applicable course rules.
 
-- The application uses Flask for the backend
-- Frontend is built with HTML, CSS, and JavaScript
-- Bootstrap 5 is used for responsive design
-- SVG is used for the interactive muscle map
+No public deployment is currently documented. The development server above is for local use.
 
-## Contributing
+## Checks
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Authors
-
-- Nick Felix
-- Mitchell Rosenthall
-- Johnathan Wrenn
-- Shaya Schwarz
+Run `python -m unittest discover -s tests` to check public pages, linked muscle lessons, the legacy quiz redirect, and unknown-muscle handling.
