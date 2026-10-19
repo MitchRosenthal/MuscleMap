@@ -38,4 +38,5 @@ class RouteTests(unittest.TestCase):
             AssetParser().feed(self.client.get(path).get_data(as_text=True))
         for asset in assets:
             with self.subTest(asset=asset):
-                self.assertEqual(self.client.get(asset).status_code, 200)
+                with self.client.get(asset) as response:
+                    self.assertEqual(response.status_code, 200)
