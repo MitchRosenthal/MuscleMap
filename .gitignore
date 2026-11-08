@@ -33,3 +33,6 @@ venv/
 !.env.example
 *.pyc
 package-lock.json
+
+# Static build output
+build/

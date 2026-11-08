@@ -4,6 +4,14 @@ An interactive anatomy learning app built by Nick Felix, Mitchell Rosenthal, Jon
 
 Explore the front and back of a muscle map, open guided muscle lessons, and practice with quizzes and a timed training game.
 
+**Live site: [mitchrosenthal.github.io/MuscleMap](https://mitchrosenthal.github.io/MuscleMap/)**
+
+![Interactive muscle map](docs/map.png)
+
+| Muscle lesson | Quiz game |
+| --- | --- |
+| ![Biceps lesson page](docs/biceps1.png) | ![Train That Muscle quiz game](docs/quiz.png) |
+
 ## Features
 
 - Clickable muscle regions with front/back views.
@@ -40,14 +48,16 @@ No database, API key, or account is needed. Some styling resources are loaded fr
 - `static/js/`: lesson and quiz interactions.
 - `static/images/` and `static/gifs/`: anatomy and movement assets.
 
-Progress is local to a browser and map progress resets when the server's session identifier changes. Quiz answers are delivered to the browser; this is a learning tool, not a secure examination system.
+Progress is local to a browser. Quiz answers are delivered to the browser; this is a learning tool, not a secure examination system.
 
-## Provenance and access
+## Deployment
 
-Originally developed in the private team repository `nicorox247/MuscleMap`. This copy preserves the original Git history. Public publication and deployment should be coordinated with the original team and applicable course rules.
-
-No public deployment is currently documented. The development server above is for local use.
+The live site is a static build of the Flask app. `freeze.py` renders every page with Flask's test client and writes the result to `build/`; `.github/workflows/deploy.yml` runs it and publishes to GitHub Pages on every push to `main`. To build it yourself, run `python freeze.py`.
 
 ## Checks
 
 Run `python -m unittest discover -s tests` to check public pages, linked muscle lessons, the standalone quiz, and unknown-muscle handling.
+
+## Provenance
+
+Originally developed in the private team repository `nicorox247/MuscleMap`. This copy preserves the original Git history.
